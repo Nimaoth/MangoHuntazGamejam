@@ -29,6 +29,13 @@ public class Player : MonoBehaviour
     public Transform healthbarTransform;
     private Vector3 healthbarOrigin;
 
+    public Transform chargebarTransform;
+    private Vector3 chargebarOrigin;
+    
+    public DamageRumble m_deathRumbel;
+    public DamageRumble m_lightAttackRumbel;
+    public DamageRumble m_strongAttackRumbel;
+    public DamageRumble m_blockRumbel;
 
     void Awake()
     {
@@ -39,13 +46,28 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
+        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
+        var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove, 
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f), 
+            0, 12, null) { damage = 5 };
 
-        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove, new Vector2(1, 1), new Vector2(2, 3), 10, 30, null) { damage = 3 };
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, null, blockMove, new Vector2(1, 1), new Vector2(1, 2), 10, 30, null) { damage = 2 };
-        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove, new Vector2(1, 1), new Vector2(0.5f, 1), 0, 20, null) { damage = 1 };
+        var heavyAttackLong = new Move("HeavyAttackLong", 18, 13, 10, 18, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            0, 18, m_strongAttackRumbel) { damage = 5 };
 
+        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove,
+            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            20, 35, m_strongAttackRumbel) { damage = 3 };
+
+        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove,
+            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            0, 15, m_lightAttackRumbel) { damage = 2 };
+
+        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            0, 15, m_lightAttackRumbel) { damage = 1 };
+        
         lightAttack1.displacementStart = 1;
         lightAttack1.displacementEnd = 3;
         lightAttack1.displacement = 1.0f;
@@ -60,9 +82,9 @@ public class Player : MonoBehaviour
 
         staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
 
-        idleMove = new Move("idle", -1, -1, -1, -1, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
+        idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackLong, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
-
+        
         currentMove = idleMove;
 
         healthbarOrigin = healthbarTransform.position;
@@ -78,7 +100,6 @@ public class Player : MonoBehaviour
             var dis = currentMove.displacement / displacementDur;
             if (playerId == 2)
                 dis = -dis;
-            //transform.Translate(new Vector3(dis, 0));
             rigidbody.MovePosition(rigidbody.position + new Vector2(dis, 0));
         }
 
@@ -91,6 +112,7 @@ public class Player : MonoBehaviour
                 attackZone.offset = currentMove.attackZoneCenter;
                 attackZone.enabled = true;
                 attackZoneActivated = true;
+                attackZone.gameObject.GetComponent<AttackZone>().DoOnEnable();
             }
         }
         else
@@ -98,6 +120,7 @@ public class Player : MonoBehaviour
             if (currentFrame >= currentMove.attackZoneEnd)
             {
                 attackZone.enabled = false;
+                attackZone.gameObject.GetComponent<AttackZone>().DoOnDisable();
             }
         }
 
@@ -122,19 +145,22 @@ public class Player : MonoBehaviour
         nextMove = next;
     }
 
-    private void SetIdle()
+    private void NextMove(Move m)
     {
-        animator.SetInteger("Direction", 0);
-        animator.SetTrigger("Idle");
-        currentMove = idleMove;
+        animator.SetTrigger(m.name);
+
         transitionTime = -1;
+        currentMove = m;
         nextMove = null;
         currentFrame = 0;
+        attackZoneActivated = false;
+        attackZone.enabled = false;
     }
 
     private void Stagger(int duration)
     {
-        SetIdle();
+        //SetIdle();    
+        NextMove(idleMove);
         staggerMove.duration = duration;
         currentMove = staggerMove;
 
@@ -173,7 +199,7 @@ public class Player : MonoBehaviour
 
             var dir = pos.x > 0 ? 1 : (pos.x < 0 ? -1 : 0);
             if (dir != 0 && currentMove != idleMove)
-                SetIdle();
+                NextMove(idleMove);
             if (playerId == 2)
                 dir = -dir;
             
@@ -194,24 +220,31 @@ public class Player : MonoBehaviour
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
         {
-            animator.SetTrigger(nextMove.name);
-
-            transitionTime = -1;
-            currentMove = nextMove;        
-            nextMove = null;
-            currentFrame = 0;
-            attackZoneActivated = false;
-            attackZone.enabled = false;
+            NextMove(nextMove);
         }
 
         if (currentMove.duration >= 0 && currentFrame > currentMove.duration)
-            SetIdle();
-
+        {
+            var next = nextMove;
+            if (next == null)
+                next = idleMove;
+            NextMove(next);
+        }
+        
         //Update UI
         var leftPlayer = playerId == 1;
         var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
+        var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
+        var currentColor = chargebarTransform.GetComponent<SpriteRenderer>().color;
+        var newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f);
 
         healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
+        chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
+        chargebarTransform.GetComponent<SpriteRenderer>().color = newColor;
+    }
+    public Move getBlockMove()
+    {
+        return blockMove;
     }
 
 }

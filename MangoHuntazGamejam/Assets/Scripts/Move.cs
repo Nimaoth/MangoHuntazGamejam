@@ -12,6 +12,7 @@ public class Move {
     public Move onLightAttack;
     public Move onHeavyAttack;
     public Move onBlock;
+    public Move onNothing;
 
     public int stunDuration;
 
@@ -28,8 +29,8 @@ public class Move {
 
     public Vector2 attackZoneCenter;
     public Vector2 attackZoneSize;
-    public int attackZoneStart;
-    public int attackZoneEnd;
+    public int attackZoneStart = -1;
+    public int attackZoneEnd = -1;
 
 
     public int blockStart;
@@ -53,5 +54,17 @@ public class Move {
         this.attackZoneStart = attackZoneStart;
         this.attackZoneEnd = attackZoneEnd;
         this.m_damageRumble = damageRumble;
+    }
+
+    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block, DamageRumble damageRumble)
+    {
+        this.name = name;
+        this.duration = duration;
+        this.cancelTime = cancelTime;
+        this.inputTimeStart = inputTimeStart;
+        this.inputTimeEnd = inputTimeEnd;
+        this.onLightAttack = onLightAttack;
+        this.onHeavyAttack = onHeavyAttack;
+        this.onBlock = block;
     }
 }

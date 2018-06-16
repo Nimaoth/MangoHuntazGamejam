@@ -25,14 +25,17 @@ public class GameManager : MonoBehaviour
     private static bool created = false;
 
 
-    public int MAX_HEALTH;
+    public float MAX_HEALTH;
     public int CHARGE_NECESSARY;
-    public int healthPlayer1;
-    public int healthPlayer2;
-    private int specialChargeP1=0;
-    private int specialChargeP2=0;
-    private bool specialP1Active;
-    private bool specialP2Active;
+    public float DAMAGE_REDUCTION_ON_BLOCK;
+    public float healthPlayer1;
+    public float healthPlayer2;
+    public float specialChargeP1=0;
+    public float specialChargeP2=0;
+    public bool specialP1Active = false;
+    public bool specialP2Active;
+    public bool damageReductionP1, damageReductionP2;
+    
 
     //intro
     public int introFadeSteps;
@@ -42,7 +45,6 @@ public class GameManager : MonoBehaviour
     public Image FightEndsImage;
     public Image SKWinsImage;
     public Image ClownWinsImage;
-
 
     void Awake()
     {
@@ -56,8 +58,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-
     }
 
     // Use this for initialization
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-    public void OnHit(int playerID, int damage, DamageRumble damageRumble)
+    public void OnHit(int playerID, float damage, DamageRumble damageRumble)
     {
         if (playerID == 1)
         {
@@ -132,7 +132,9 @@ public class GameManager : MonoBehaviour
 
             if (healthPlayer1 <= 0)
             {
+                RumbleFeedback.beginRumble(playerID, damageRumble);
                 EndGame(2);
+                return;
             }
         }
         else
@@ -140,7 +142,9 @@ public class GameManager : MonoBehaviour
             healthPlayer2 -= damage;
             if (healthPlayer2 <= 0)
             {
+                RumbleFeedback.beginRumble(playerID, damageRumble);
                 EndGame(1);
+                return;
             }
         }
         RumbleFeedback.beginRumble(playerID,damageRumble);
@@ -169,7 +173,6 @@ public class GameManager : MonoBehaviour
         player1.isControllable = false;
         player2.isControllable = false;
         StartCoroutine(FightOutro(winnerID));
-
     }
 
     IEnumerator FightOutro(int winnerID)
