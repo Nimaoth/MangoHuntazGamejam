@@ -71,3 +71,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.csproj
+MangoHuntazGamejam/Assets/Sprites/UI/Healthbar/Frame_charge.psd
+MangoHuntazGamejam/Assets/Sprites/UI/Healthbar/Foreground_charge.psd
+MangoHuntazGamejam/Assets/Sprites/UI/Healthbar/Background_charge.psd
