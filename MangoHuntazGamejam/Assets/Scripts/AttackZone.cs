@@ -4,6 +4,8 @@ public class AttackZone : MonoBehaviour {
 
     private int enemyPlayerID;
     public Player player;
+    private float enemyHealth;
+    Player enemy;
 
     public void Awake()
     {
@@ -16,11 +18,50 @@ public class AttackZone : MonoBehaviour {
             enemyPlayerID = 1;
         }
     }
+    public void Start()
+    {
+        if (enemyPlayerID == 2)
+        {
+            enemy = GameManager.instance.player2;
+        }
+        else
+        {
+            enemy = GameManager.instance.player1;
+        }
+    }
+
+    public void DoOnEnable()
+    {
+        if (enemyPlayerID == 1)
+            enemyHealth = GameManager.instance.healthPlayer1;
+        else if (enemyPlayerID == 2)
+            enemyHealth = GameManager.instance.healthPlayer2;
+    }
+    public void DoOnDisable()
+    {
+        if (enemyPlayerID == 1)
+        {
+            if (GameManager.instance.healthPlayer1 == enemyHealth)
+                GameManager.instance.OnMiss(player.playerId);
+        }
+        else if (enemyPlayerID==2)
+        {
+            if (GameManager.instance.healthPlayer2 == enemyHealth)
+                GameManager.instance.OnMiss(player.playerId);
+        }
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Hit!: " + collision.gameObject.name);
         GetComponent<BoxCollider2D>().enabled = false;
-        GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage, player.currentMove.m_damageRumble);
+        if (!enemy.currentMove.Equals(enemy.getBlockMove()))
+            GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage, player.currentMove.m_damageRumble);
+        else
+        {
+            GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage * (1 - GameManager.instance.DAMAGE_REDUCTION_ON_BLOCK), player.currentMove.m_damageRumble);
+            GameManager.instance.OnMiss(player.playerId);
+            Debug.Log("Blocked!");
+        }
     }
 }

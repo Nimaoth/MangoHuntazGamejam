@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
                 attackZone.offset = currentMove.attackZoneCenter;
                 attackZone.enabled = true;
                 attackZoneActivated = true;
+                attackZone.gameObject.GetComponent<AttackZone>().DoOnEnable();
             }
         }
         else
@@ -110,6 +111,7 @@ public class Player : MonoBehaviour
             if (currentFrame >= currentMove.attackZoneEnd)
             {
                 attackZone.enabled = false;
+                attackZone.gameObject.GetComponent<AttackZone>().DoOnDisable();
             }
         }
 
@@ -245,4 +247,9 @@ public class Player : MonoBehaviour
 
         healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
     }
+    public Move getBlockMove()
+    {
+        return blockMove;
+    }
+
 }
