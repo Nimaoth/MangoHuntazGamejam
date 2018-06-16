@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
     public Image SKWinsImage;
     public Image ClownWinsImage;
 
-
     void Awake()
     {
         if (!created)
@@ -56,8 +55,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-
     }
 
     // Use this for initialization
@@ -132,7 +129,9 @@ public class GameManager : MonoBehaviour
 
             if (healthPlayer1 <= 0)
             {
+                RumbleFeedback.beginRumble(playerID, damageRumble);
                 EndGame(2);
+                return;
             }
         }
         else
@@ -140,7 +139,9 @@ public class GameManager : MonoBehaviour
             healthPlayer2 -= damage;
             if (healthPlayer2 <= 0)
             {
+                RumbleFeedback.beginRumble(playerID, damageRumble);
                 EndGame(1);
+                return;
             }
         }
         RumbleFeedback.beginRumble(playerID,damageRumble);
@@ -169,7 +170,6 @@ public class GameManager : MonoBehaviour
         player1.isControllable = false;
         player2.isControllable = false;
         StartCoroutine(FightOutro(winnerID));
-
     }
 
     IEnumerator FightOutro(int winnerID)
