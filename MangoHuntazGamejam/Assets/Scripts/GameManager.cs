@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
 
     public int MAX_HEALTH;
     public int CHARGE_NECESSARY;
-    private int healthPlayer1;
-    private int healthPlayer2;
+    public int healthPlayer1;
+    public int healthPlayer2;
     private int specialChargeP1=0;
     private int specialChargeP2=0;
     private bool specialP1Active;

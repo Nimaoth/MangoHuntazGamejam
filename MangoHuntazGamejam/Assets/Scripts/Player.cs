@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
 
     public bool isControllable = false;
 
+    public Transform healthbarTransform;
+    private Vector3 healthbarOrigin;
+
 
     void Awake()
     {
@@ -69,6 +72,8 @@ public class Player : MonoBehaviour
         heavyAttackBuildUp.onNothing = heavyAttackHit;
 
         currentMove = idleMove;
+
+        healthbarOrigin = healthbarTransform.position;
     }
 
     void FixedUpdate()
@@ -229,5 +234,11 @@ public class Player : MonoBehaviour
                 next = idleMove;
             NextMove(next);
         }
+        
+        //Update UI
+        var leftPlayer = playerId == 1;
+        var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
+
+        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
     }
 }
