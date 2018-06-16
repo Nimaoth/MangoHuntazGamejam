@@ -94,9 +94,8 @@ public class GameManager : MonoBehaviour
         fightIntroImage.enabled = true;
         while (counter < introFadeSteps)
         {
-            float alpha = (float)counter / introFadeSteps;
-            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, alpha);
-            counter++;
+            float alpha = counter / introFadeSteps;
+            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, fightIntroImage.color.a);
             yield return new WaitForSeconds(delta);
         }
         yield return new WaitForSeconds(0.5f);
@@ -113,7 +112,7 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-    public void OnHit(int playerID, int damage)
+    public void OnHit(int playerID, int damage, DamageRumble damageRumble)
     {
         if (playerID == 1)
         {
@@ -132,7 +131,7 @@ public class GameManager : MonoBehaviour
                 EndGame(1);
             }
         }
-
+        RumbleFeedback.beginRumble(playerID,damageRumble);
         Debug.Log("p1: " + healthPlayer1 + ", p2: " + healthPlayer2);
     }
 

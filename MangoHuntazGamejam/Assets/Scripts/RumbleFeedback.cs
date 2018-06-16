@@ -6,6 +6,12 @@ using XInputDotNetPure;
 
 public class RumbleFeedback
 {
+    public static void beginRumble(int playerIndex, DamageRumble damageRumble)
+    {
+        if (damageRumble == null)
+            return;
+        beginRumble(playerIndex, damageRumble.m_higherMotor, damageRumble.m_lowerMotor, damageRumble.m_duration);
+    }
 
     public static void beginRumble(int playerIndex, float low, float high, float duration)
     {
