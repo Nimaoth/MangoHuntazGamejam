@@ -25,14 +25,16 @@ public class GameManager : MonoBehaviour
     private static bool created = false;
 
 
-    public int MAX_HEALTH;
+    public float MAX_HEALTH;
     public int CHARGE_NECESSARY;
-    public int healthPlayer1;
-    public int healthPlayer2;
+    public float DAMAGE_REDUCTION_ON_BLOCK;
+    public float healthPlayer1;
+    public float healthPlayer2;
     private int specialChargeP1=0;
     private int specialChargeP2=0;
     private bool specialP1Active;
     private bool specialP2Active;
+    public bool damageReductionP1, damageReductionP2;
 
     //intro
     public int introFadeSteps;
@@ -124,7 +126,7 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-    public void OnHit(int playerID, int damage, DamageRumble damageRumble)
+    public void OnHit(int playerID, float damage, DamageRumble damageRumble)
     {
         if (playerID == 1)
         {
