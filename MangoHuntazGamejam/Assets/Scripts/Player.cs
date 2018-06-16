@@ -119,6 +119,8 @@ public class Player : MonoBehaviour
 
     private void SetIdle()
     {
+        animator.SetInteger("Direction", 0);
+        animator.SetTrigger("Idle");
         currentMove = idleMove;
         transitionTime = -1;
         nextMove = null;
@@ -154,6 +156,7 @@ public class Player : MonoBehaviour
     {
         if (CanMove())
         {
+
             var pos = new Vector2();
             pos.x = InputManager.horizontal(playerId);
             if (pos.x < 0)
@@ -164,6 +167,8 @@ public class Player : MonoBehaviour
             rigidbody.MovePosition(rigidbody.position + pos * (Time.deltaTime * 20));
 
             var dir = pos.x > 0 ? 1 : (pos.x < 0 ? -1 : 0);
+            if (dir != 0 && currentMove != idleMove)
+                SetIdle();
             if (playerId == 2)
                 dir = -dir;
             
