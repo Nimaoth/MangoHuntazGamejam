@@ -48,17 +48,25 @@ public class Player : MonoBehaviour
     {
         blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
-        var heavyAttackShort = new Move("HeavyAttackShort", 20, 15, 10, 20, null, null, blockMove, 
+        var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove, 
             new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f), 
-            -10, 15, null) { damage = 5 };
+            0, 12, null) { damage = 5 };
 
-        var heavyAttackLong = new Move("HeavyAttackLong", 25, 20, 15, 25, null, null, blockMove,
+        var heavyAttackLong = new Move("HeavyAttackLong", 18, 13, 10, 18, null, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            10, 15, m_strongAttackRumbel) { damage = 5 };
+            0, 18, m_strongAttackRumbel) { damage = 5 };
 
-        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove, new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1), 20, 35, m_strongAttackRumbel) { damage = 3 };
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove, new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f), 0, 15, m_lightAttackRumbel) { damage = 2 };
-        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove, new Vector2(1.5f, 0.5f), new Vector2(1, 2), 0, 15, m_lightAttackRumbel) { damage = 1 };
+        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove,
+            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            20, 35, m_strongAttackRumbel) { damage = 3 };
+
+        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove,
+            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            0, 15, m_lightAttackRumbel) { damage = 2 };
+
+        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            0, 15, m_lightAttackRumbel) { damage = 1 };
         
         lightAttack1.displacementStart = 1;
         lightAttack1.displacementEnd = 3;
