@@ -93,7 +93,6 @@ public class Player : MonoBehaviour
             var dis = currentMove.displacement / displacementDur;
             if (playerId == 2)
                 dis = -dis;
-            //transform.Translate(new Vector3(dis, 0));
             rigidbody.MovePosition(rigidbody.position + new Vector2(dis, 0));
         }
 
@@ -138,17 +137,6 @@ public class Player : MonoBehaviour
 
         nextMove = next;
     }
-
-    //private void SetIdle()
-    //{
-    //    animator.SetInteger("Direction", 0);
-    //    animator.SetTrigger("Idle");
-
-    //    transitionTime = -1;
-    //    currentMove = idleMove;
-    //    nextMove = null;
-    //    currentFrame = 0;
-    //}
 
     private void NextMove(Move m)
     {
@@ -225,21 +213,13 @@ public class Player : MonoBehaviour
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
         {
-            animator.SetTrigger(nextMove.name);
-
-            transitionTime = -1;
-            currentMove = nextMove;        
-            nextMove = null;
-            currentFrame = 0;
-            attackZoneActivated = false;
-            attackZone.enabled = false;
+            NextMove(nextMove);
         }
 
         if (currentMove.duration >= 0 && currentFrame > currentMove.duration)
         {
-            //SetIdle();
             var next = nextMove;
-            if (nextMove == null)
+            if (next == null)
                 next = idleMove;
             NextMove(next);
         }
