@@ -1407,7 +1407,7 @@ MonoBehaviour:
   playerId: 1
   attackZone: {fileID: 1766759649}
   isControllable: 0
-  healthbarTransform: {fileID: 442275148}
+  healthbarTransform: {fileID: 1470130284}
 --- !u!50 &1589770875
 Rigidbody2D:
   serializedVersion: 4
@@ -1579,6 +1579,7 @@ MonoBehaviour:
   Player1Spawn: {fileID: 675556487}
   Player2Spawn: {fileID: 1288015000}
   MAX_HEALTH: 100
+  CHARGE_NECESSARY: 0
   healthPlayer1: 0
   healthPlayer2: 0
   introFadeSteps: 0
@@ -1867,7 +1868,7 @@ MonoBehaviour:
   playerId: 2
   attackZone: {fileID: 312228068}
   isControllable: 0
-  healthbarTransform: {fileID: 153153581}
+  healthbarTransform: {fileID: 381540466}
 --- !u!4 &2083916442
 Transform:
   m_ObjectHideFlags: 0
