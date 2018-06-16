@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88deb3104f8884b41af8a38f7ed23a6e, type: 3}
   m_Name: Block
   m_EditorClassIdentifier: 
-  m_higherMotor: 0
-  m_lowerMotor: 0
-  m_duration: 0
+  m_higherMotor: 0.7
+  m_lowerMotor: 0.2
+  m_duration: 0.3
