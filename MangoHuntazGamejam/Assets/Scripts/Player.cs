@@ -48,11 +48,16 @@ public class Player : MonoBehaviour
     {
         blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
-        var heavyAttackBuildUp = new Move("HeavyAttack", 20, 15, 10, 20, null, null, blockMove, new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f), 10, 15, null) { damage = 5 };
-        var heavyAttackHit = new Move("HeavyAttack", 25, 20, 15, 25, null, null, blockMove, m_strongAttackRumbel);
+        var heavyAttackShort = new Move("HeavyAttackShort", 20, 15, 10, 20, null, null, blockMove, 
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f), 
+            -10, 15, null) { damage = 5 };
+
+        var heavyAttackLong = new Move("HeavyAttackLong", 25, 20, 15, 25, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            10, 15, m_strongAttackRumbel) { damage = 5 };
 
         var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove, new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1), 20, 35, m_strongAttackRumbel) { damage = 3 };
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackHit, blockMove, new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f), 0, 15, m_lightAttackRumbel) { damage = 2 };
+        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove, new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f), 0, 15, m_lightAttackRumbel) { damage = 2 };
         var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove, new Vector2(1.5f, 0.5f), new Vector2(1, 2), 0, 15, m_lightAttackRumbel) { damage = 1 };
         
         lightAttack1.displacementStart = 1;
@@ -69,15 +74,9 @@ public class Player : MonoBehaviour
 
         staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
 
-        idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackBuildUp, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
+        idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackLong, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
-
-        lightAttack1.onNothing = idleMove;
-        lightAttack2.onNothing = idleMove;
-        lightAttack3.onNothing = idleMove;
-        heavyAttackHit.onNothing = idleMove;
-        heavyAttackBuildUp.onNothing = heavyAttackHit;
-
+        
         currentMove = idleMove;
 
         healthbarOrigin = healthbarTransform.position;
