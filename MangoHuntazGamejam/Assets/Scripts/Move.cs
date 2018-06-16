@@ -56,7 +56,7 @@ public class Move {
         this.m_damageRumble = damageRumble;
     }
 
-    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block)
+    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block, DamageRumble damageRumble)
     {
         this.name = name;
         this.duration = duration;
