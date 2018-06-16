@@ -26,14 +26,23 @@ public class GameManager : MonoBehaviour
 
 
     public int MAX_HEALTH;
+    public int CHARGE_NECESSARY;
     public int healthPlayer1;
     public int healthPlayer2;
+    private int specialChargeP1=0;
+    private int specialChargeP2=0;
+    private bool specialP1Active;
+    private bool specialP2Active;
 
     //intro
     public int introFadeSteps;
     public float introFadeDuration;
     public Image fightIntroImage;
     public Image fightImage;
+    public Image FightEndsImage;
+    public Image SKWinsImage;
+    public Image ClownWinsImage;
+
 
     void Awake()
     {
@@ -84,21 +93,24 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine("FightIntro");
     }
+    
+    
 
     IEnumerator FightIntro()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         float delta = introFadeDuration / introFadeSteps;
 
         int counter = 0;
         fightIntroImage.enabled = true;
         while (counter < introFadeSteps)
         {
-            float alpha = counter / introFadeSteps;
-            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, fightIntroImage.color.a);
+            float alpha = (float)counter / introFadeSteps;
+            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, alpha);
+            counter++;
             yield return new WaitForSeconds(delta);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         fightIntroImage.enabled = false;
         player1.isControllable = true;
         player2.isControllable = true;
@@ -112,7 +124,7 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-    public void OnHit(int playerID, int damage)
+    public void OnHit(int playerID, int damage, DamageRumble damageRumble)
     {
         if (playerID == 1)
         {
@@ -131,15 +143,62 @@ public class GameManager : MonoBehaviour
                 EndGame(1);
             }
         }
-
+        RumbleFeedback.beginRumble(playerID,damageRumble);
         Debug.Log("p1: " + healthPlayer1 + ", p2: " + healthPlayer2);
+    }
+    //call from Player.cs when the corresponding player missed a hit/was blocked
+    public void OnMiss(int playerID)
+    {
+        if (playerID == 1)
+            specialChargeP2++;
+        if (playerID == 2)
+            specialChargeP1++;
+        if (specialChargeP1 >= CHARGE_NECESSARY)
+            specialP1Active = true;
+        else
+            specialP1Active = false;
+        if (specialChargeP2 >= CHARGE_NECESSARY)
+            specialP2Active = true;
+        else
+            specialP2Active = false;
     }
 
     void EndGame(int winnerID)
     {
         Debug.Log("Player " + winnerID + " wins!!!");
+        player1.isControllable = false;
+        player2.isControllable = false;
+        StartCoroutine(FightOutro(winnerID));
+
     }
 
+    IEnumerator FightOutro(int winnerID)
+    {
+        FightEndsImage.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        FightEndsImage.enabled = false;
+        if(winnerID == 1)
+        {
+            //SKwins?
+            SKWinsImage.enabled = true;
+        }
+        else
+        {
+            ClownWinsImage.enabled = true;
+        }
+        yield return new WaitForSeconds(1.0f);
+
+        SKWinsImage.enabled = false;
+        ClownWinsImage.enabled = false;
+        NewRound();
+    }
+
+
+    void NewRound()
+    {
+        //todo
+        Debug.Log("newround");
+    }
     void OnEnable()
     {
         //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.

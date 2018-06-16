@@ -36,7 +36,9 @@ public class Move {
     public int blockEnd;
     public float blockFactor;
 
-    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block, Vector2 attackZoneCenter, Vector2 attackZoneSize, int attackZoneStart, int attackZoneEnd)
+    public DamageRumble m_damageRumble;
+
+    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block, Vector2 attackZoneCenter, Vector2 attackZoneSize, int attackZoneStart, int attackZoneEnd, DamageRumble damageRumble)
     {
         this.name = name;
         this.duration = duration;
@@ -50,5 +52,6 @@ public class Move {
         this.attackZoneSize = attackZoneSize;
         this.attackZoneStart = attackZoneStart;
         this.attackZoneEnd = attackZoneEnd;
+        this.m_damageRumble = damageRumble;
     }
 }

@@ -21,6 +21,6 @@ public class AttackZone : MonoBehaviour {
     {
         //Debug.Log("Hit!: " + collision.gameObject.name);
         GetComponent<BoxCollider2D>().enabled = false;
-        GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage);
+        GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage, player.currentMove.m_damageRumble);
     }
 }
