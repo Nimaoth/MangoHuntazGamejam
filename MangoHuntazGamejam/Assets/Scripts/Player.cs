@@ -29,6 +29,9 @@ public class Player : MonoBehaviour
     public Transform healthbarTransform;
     private Vector3 healthbarOrigin;
 
+    public Transform chargebarTransform;
+    private Vector3 chargebarOrigin;
+    
     public DamageRumble m_deathRumbel;
     public DamageRumble m_lightAttackRumbel;
     public DamageRumble m_strongAttackRumbel;
@@ -244,8 +247,13 @@ public class Player : MonoBehaviour
         //Update UI
         var leftPlayer = playerId == 1;
         var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
+        var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
+        var currentColor = chargebarTransform.GetComponent<SpriteRenderer>().color;
+        var newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f);
 
         healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
+        chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
+        chargebarTransform.GetComponent<SpriteRenderer>().color = newColor;
     }
     public Move getBlockMove()
     {

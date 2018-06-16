@@ -30,11 +30,12 @@ public class GameManager : MonoBehaviour
     public float DAMAGE_REDUCTION_ON_BLOCK;
     public float healthPlayer1;
     public float healthPlayer2;
-    private int specialChargeP1=0;
-    private int specialChargeP2=0;
-    private bool specialP1Active;
-    private bool specialP2Active;
+    public float specialChargeP1=0;
+    public float specialChargeP2=0;
+    public bool specialP1Active = false;
+    public bool specialP2Active;
     public bool damageReductionP1, damageReductionP2;
+    
 
     //intro
     public int introFadeSteps;
