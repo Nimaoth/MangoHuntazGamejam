@@ -34,6 +34,10 @@ public class GameManager : MonoBehaviour
     public float introFadeDuration;
     public Image fightIntroImage;
     public Image fightImage;
+    public Image FightEndsImage;
+    public Image SKWinsImage;
+    public Image ClownWinsImage;
+
 
     void Awake()
     {
@@ -87,18 +91,19 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FightIntro()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         float delta = introFadeDuration / introFadeSteps;
 
         int counter = 0;
         fightIntroImage.enabled = true;
         while (counter < introFadeSteps)
         {
-            float alpha = counter / introFadeSteps;
-            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, fightIntroImage.color.a);
+            float alpha = (float)counter / introFadeSteps;
+            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, alpha);
+            counter++;
             yield return new WaitForSeconds(delta);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         fightIntroImage.enabled = false;
         player1.isControllable = true;
         player2.isControllable = true;
@@ -138,8 +143,39 @@ public class GameManager : MonoBehaviour
     void EndGame(int winnerID)
     {
         Debug.Log("Player " + winnerID + " wins!!!");
+        player1.isControllable = false;
+        player2.isControllable = false;
+        StartCoroutine(FightOutro(winnerID));
+
     }
 
+    IEnumerator FightOutro(int winnerID)
+    {
+        FightEndsImage.enabled = true;
+        yield return new WaitForSeconds(0.5f);
+        FightEndsImage.enabled = false;
+        if(winnerID == 1)
+        {
+            //SKwins?
+            SKWinsImage.enabled = true;
+        }
+        else
+        {
+            ClownWinsImage.enabled = true;
+        }
+        yield return new WaitForSeconds(1.0f);
+
+        SKWinsImage.enabled = false;
+        ClownWinsImage.enabled = false;
+        NewRound();
+    }
+
+
+    void NewRound()
+    {
+        //todo
+        Debug.Log("newround");
+    }
     void OnEnable()
     {
         //Tell our 'OnLevelFinishedLoading' function to start listening for a scene change as soon as this script is enabled.
