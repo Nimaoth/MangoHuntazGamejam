@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
@@ -28,10 +30,13 @@ public class Player : MonoBehaviour
 
     public Transform healthbarTransform;
     private Vector3 healthbarOrigin;
+    private Image stars;
+    private Image beam;
+    private float startime;
+    private float beamtime;
 
     public Transform chargebarTransform;
     private Vector3 chargebarOrigin;
-    
     public DamageRumble m_deathRumbel;
     public DamageRumble m_lightAttackRumbel;
     public DamageRumble m_strongAttackRumbel;
@@ -41,6 +46,9 @@ public class Player : MonoBehaviour
     {
         animator = transform.GetComponentInChildren<Animator>();
         rigidbody = transform.GetComponent<Rigidbody2D>();
+        stars = playerId == 1 ? chargebarTransform.Find("Chargebar 1/Background/Foreground/stars").GetComponent<Image>() : chargebarTransform.Find("Chargebar 2/Background/Foreground/stars").GetComponent<Image>();
+        beam = playerId == 1 ? chargebarTransform.Find("Chargebar 1/Background/Foreground/light").GetComponent<Image>() : chargebarTransform.Find("Chargebar 2/Background/Foreground/light").GetComponent<Image>();
+
     }
 
     // Use this for initialization
@@ -239,12 +247,28 @@ public class Player : MonoBehaviour
         var newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f);
 
         healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
-        chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
-        chargebarTransform.GetComponent<SpriteRenderer>().color = newColor;
+        chargebarTransform.GetChild(1).GetComponent<SpriteRenderer>().color = newColor;
+        StartCoroutine(Animate());
     }
     public Move getBlockMove()
     {
         return blockMove;
     }
+    public IEnumerator Animate()
+    {
+        while (true)
+        {
+            beamtime += 0.1f;
+            beamtime %=1.0f;
+            startime += 0.05f;
+            startime %= 1.0f;
+            beam.material.SetFloat("_GlowPos", beamtime);
+            beam.material.SetFloat("_GlowWidth", 0.085f);
 
+            stars.material.SetFloat("_GlowPos", startime);
+            stars.material.SetFloat("_GlowWidth", 0.063f);
+            Debug.Log(beamtime);
+            yield return 0;
+        }
+    }
 }
