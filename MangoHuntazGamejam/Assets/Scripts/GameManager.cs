@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     public float healthPlayer2;
     public float specialChargeP1=0;
     public float specialChargeP2=0;
-    public bool specialP1Active = false;
+    public bool specialP1Active;
     public bool specialP2Active;
     public bool damageReductionP1, damageReductionP2;
     
