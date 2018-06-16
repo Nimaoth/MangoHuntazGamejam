@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1513,7 +1513,7 @@ Animator:
   m_GameObject: {fileID: 1630105378}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 70a34efa837df58439945fbabfd42b90, type: 2}
+  m_Controller: {fileID: 9100000, guid: 51f14730723772c4f996729095ed868b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1579,6 +1579,7 @@ MonoBehaviour:
   Player1Spawn: {fileID: 675556487}
   Player2Spawn: {fileID: 1288015000}
   MAX_HEALTH: 100
+  CHARGE_NECESSARY: 0
   healthPlayer1: 0
   healthPlayer2: 0
   introFadeSteps: 0
