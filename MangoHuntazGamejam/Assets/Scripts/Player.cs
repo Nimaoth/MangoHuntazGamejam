@@ -7,8 +7,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     public int playerId;
 
-    public DynamicFloat m_hitBar;
-
     public Move currentMove;
     private Move idleMove;
     private Move blockMove;
@@ -28,6 +26,9 @@ public class Player : MonoBehaviour
 
     public bool isControllable = false;
 
+    public Transform healthbarTransform;
+    private Vector3 healthbarOrigin;
+
 
     void Awake()
     {
@@ -38,13 +39,15 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1);
+        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
 
+        var heavyAttackBuildUp = new Move("HeavyAttack", 20, 15, 10, 20, null, null, blockMove, new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f), 10, 15, null) { damage = 5 };
+        var heavyAttackHit = new Move("HeavyAttack", 25, 20, 15, 25, null, null, blockMove);
 
-        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove, new Vector2(1, 1), new Vector2(2, 3), 10, 30) { damage = 3 };
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, null, blockMove, new Vector2(1, 1), new Vector2(1, 2), 10, 30) { damage = 2 };
-        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove, new Vector2(1, 1), new Vector2(0.5f, 1), 0, 20) { damage = 1 };
-
+        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove, new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1), 20, 35, null) { damage = 3 };
+        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackHit, blockMove, new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f), 0, 15, null) { damage = 2 };
+        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove, new Vector2(1.5f, 0.5f), new Vector2(1, 2), 0, 15, null) { damage = 1 };
+        
         lightAttack1.displacementStart = 1;
         lightAttack1.displacementEnd = 3;
         lightAttack1.displacement = 1.0f;
@@ -57,12 +60,20 @@ public class Player : MonoBehaviour
         lightAttack3.displacementEnd = 4;
         lightAttack3.displacement = 1.25f;
 
-        staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1);
+        staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
 
-        idleMove = new Move("idle", -1, -1, -1, -1, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1);
+        idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackBuildUp, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
 
+        lightAttack1.onNothing = idleMove;
+        lightAttack2.onNothing = idleMove;
+        lightAttack3.onNothing = idleMove;
+        heavyAttackHit.onNothing = idleMove;
+        heavyAttackBuildUp.onNothing = heavyAttackHit;
+
         currentMove = idleMove;
+
+        healthbarOrigin = healthbarTransform.position;
     }
 
     void FixedUpdate()
@@ -119,17 +130,33 @@ public class Player : MonoBehaviour
         nextMove = next;
     }
 
-    private void SetIdle()
+    //private void SetIdle()
+    //{
+    //    animator.SetInteger("Direction", 0);
+    //    animator.SetTrigger("Idle");
+
+    //    transitionTime = -1;
+    //    currentMove = idleMove;
+    //    nextMove = null;
+    //    currentFrame = 0;
+    //}
+
+    private void NextMove(Move m)
     {
-        currentMove = idleMove;
+        animator.SetTrigger(m.name);
+
         transitionTime = -1;
+        currentMove = m;
         nextMove = null;
         currentFrame = 0;
+        attackZoneActivated = false;
+        attackZone.enabled = false;
     }
 
     private void Stagger(int duration)
     {
-        SetIdle();
+        //SetIdle();    
+        NextMove(idleMove);
         staggerMove.duration = duration;
         currentMove = staggerMove;
 
@@ -156,6 +183,7 @@ public class Player : MonoBehaviour
     {
         if (CanMove())
         {
+
             var pos = new Vector2();
             pos.x = InputManager.horizontal(playerId);
             if (pos.x < 0)
@@ -166,6 +194,8 @@ public class Player : MonoBehaviour
             rigidbody.MovePosition(rigidbody.position + pos * (Time.deltaTime * 20));
 
             var dir = pos.x > 0 ? 1 : (pos.x < 0 ? -1 : 0);
+            if (dir != 0 && currentMove != idleMove)
+                NextMove(idleMove);
             if (playerId == 2)
                 dir = -dir;
             
@@ -197,7 +227,18 @@ public class Player : MonoBehaviour
         }
 
         if (currentMove.duration >= 0 && currentFrame > currentMove.duration)
-            SetIdle();
-    }
+        {
+            //SetIdle();
+            var next = nextMove;
+            if (nextMove == null)
+                next = idleMove;
+            NextMove(next);
+        }
+        
+        //Update UI
+        var leftPlayer = playerId == 1;
+        var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
 
+        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
+    }
 }
