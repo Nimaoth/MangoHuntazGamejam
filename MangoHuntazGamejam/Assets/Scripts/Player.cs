@@ -7,8 +7,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     public int playerId;
 
-    public DynamicFloat m_hitBar;
-
     public Move currentMove;
     private Move idleMove;
     private Move blockMove;
@@ -38,12 +36,12 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1);
+        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
 
 
-        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove, new Vector2(1, 1), new Vector2(2, 3), 10, 30) { damage = 3 };
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, null, blockMove, new Vector2(1, 1), new Vector2(1, 2), 10, 30) { damage = 2 };
-        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove, new Vector2(1, 1), new Vector2(0.5f, 1), 0, 20) { damage = 1 };
+        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove, new Vector2(1, 1), new Vector2(2, 3), 10, 30, null) { damage = 3 };
+        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, null, blockMove, new Vector2(1, 1), new Vector2(1, 2), 10, 30, null) { damage = 2 };
+        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove, new Vector2(1, 1), new Vector2(0.5f, 1), 0, 20, null) { damage = 1 };
 
         lightAttack1.displacementStart = 1;
         lightAttack1.displacementEnd = 3;
@@ -57,9 +55,9 @@ public class Player : MonoBehaviour
         lightAttack3.displacementEnd = 4;
         lightAttack3.displacement = 1.25f;
 
-        staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1);
+        staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
 
-        idleMove = new Move("idle", -1, -1, -1, -1, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1);
+        idleMove = new Move("idle", -1, -1, -1, -1, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
 
         currentMove = idleMove;
