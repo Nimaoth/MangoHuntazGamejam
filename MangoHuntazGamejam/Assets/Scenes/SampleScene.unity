@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1009,6 +1009,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &807090732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 807090734}
+  - component: {fileID: 807090733}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &807090733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 807090732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0168f8a955f324f89bcff6d2ce028d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CeddosSupremeGeilerUltraTest:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  Player1HasBeenHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1589770872}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: HasBeenHitEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  Player1Whiffs:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!4 &807090734
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 807090732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.543454, y: -0.043853857, z: 1.4630291}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1074787319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1474,12 @@ MonoBehaviour:
   attackZone: {fileID: 1766759649}
   isControllable: 0
   healthbarTransform: {fileID: 442275148}
+  m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
+  m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
+    type: 2}
+  m_strongAttackRumbel: {fileID: 11400000, guid: a1251d222376d7b4da326fb87fa177a6,
+    type: 2}
+  m_blockRumbel: {fileID: 11400000, guid: 3d0477ad2f7454842a811416bb8c7e6a, type: 2}
 --- !u!50 &1589770875
 Rigidbody2D:
   serializedVersion: 4
@@ -1869,6 +1941,12 @@ MonoBehaviour:
   attackZone: {fileID: 312228068}
   isControllable: 0
   healthbarTransform: {fileID: 153153581}
+  m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
+  m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
+    type: 2}
+  m_strongAttackRumbel: {fileID: 11400000, guid: a1251d222376d7b4da326fb87fa177a6,
+    type: 2}
+  m_blockRumbel: {fileID: 11400000, guid: 3d0477ad2f7454842a811416bb8c7e6a, type: 2}
 --- !u!4 &2083916442
 Transform:
   m_ObjectHideFlags: 0
