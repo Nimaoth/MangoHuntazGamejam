@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class AttackZone : MonoBehaviour {
+public class AttackZone : MonoBehaviour
+{
 
     private int enemyPlayerID;
     public Player player;
@@ -44,7 +45,7 @@ public class AttackZone : MonoBehaviour {
             if (GameManager.instance.healthPlayer1 == enemyHealth)
                 GameManager.instance.OnMiss(player.playerId);
         }
-        else if (enemyPlayerID==2)
+        else if (enemyPlayerID == 2)
         {
             if (GameManager.instance.healthPlayer2 == enemyHealth)
                 GameManager.instance.OnMiss(player.playerId);
@@ -56,10 +57,13 @@ public class AttackZone : MonoBehaviour {
         //Debug.Log("Hit!: " + collision.gameObject.name);
         GetComponent<BoxCollider2D>().enabled = false;
         if (!enemy.currentMove.Equals(enemy.getBlockMove()))
+        {
+            RumbleFeedback.beginRumble(player.playerId, player.currentMove.m_damageRumble);
             GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage, player.currentMove.m_damageRumble);
+        }
         else
         {
-            RumbleFeedback.beginRumble(enemy.playerId, enemy.m_lightAttackRumbel);
+            RumbleFeedback.beginRumble(player.playerId, player.m_lightAttackRumbel);
             GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage * (1 - GameManager.instance.DAMAGE_REDUCTION_ON_BLOCK), player.m_blockRumbel);
             GameManager.instance.OnMiss(player.playerId);
             Debug.Log("Blocked!");
