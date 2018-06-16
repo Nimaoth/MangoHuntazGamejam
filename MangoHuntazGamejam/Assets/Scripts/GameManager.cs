@@ -26,8 +26,13 @@ public class GameManager : MonoBehaviour
 
 
     public int MAX_HEALTH;
+    public int CHARGE_NECESSARY;
     private int healthPlayer1;
     private int healthPlayer2;
+    private int specialChargeP1=0;
+    private int specialChargeP2=0;
+    private bool specialP1Active;
+    private bool specialP2Active;
 
     //intro
     public int introFadeSteps;
@@ -88,6 +93,8 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine("FightIntro");
     }
+    
+    
 
     IEnumerator FightIntro()
     {
@@ -138,6 +145,22 @@ public class GameManager : MonoBehaviour
         }
         RumbleFeedback.beginRumble(playerID,damageRumble);
         Debug.Log("p1: " + healthPlayer1 + ", p2: " + healthPlayer2);
+    }
+    //call from Player.cs when the corresponding player missed a hit/was blocked
+    public void OnMiss(int playerID)
+    {
+        if (playerID == 1)
+            specialChargeP2++;
+        if (playerID == 2)
+            specialChargeP1++;
+        if (specialChargeP1 >= CHARGE_NECESSARY)
+            specialP1Active = true;
+        else
+            specialP1Active = false;
+        if (specialChargeP2 >= CHARGE_NECESSARY)
+            specialP2Active = true;
+        else
+            specialP2Active = false;
     }
 
     void EndGame(int winnerID)
