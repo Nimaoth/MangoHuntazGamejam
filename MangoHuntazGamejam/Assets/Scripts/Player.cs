@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
 
     public bool isControllable = false;
 
+    public Transform healthbarTransform;
+    private Vector3 healthbarOrigin;
+
 
     void Awake()
     {
@@ -61,6 +64,8 @@ public class Player : MonoBehaviour
         idleMove.loop = true;
 
         currentMove = idleMove;
+
+        healthbarOrigin = healthbarTransform.position;
     }
 
     void FixedUpdate()
@@ -119,6 +124,8 @@ public class Player : MonoBehaviour
 
     private void SetIdle()
     {
+        animator.SetInteger("Direction", 0);
+        animator.SetTrigger("Idle");
         currentMove = idleMove;
         transitionTime = -1;
         nextMove = null;
@@ -154,6 +161,7 @@ public class Player : MonoBehaviour
     {
         if (CanMove())
         {
+
             var pos = new Vector2();
             pos.x = InputManager.horizontal(playerId);
             if (pos.x < 0)
@@ -164,6 +172,8 @@ public class Player : MonoBehaviour
             rigidbody.MovePosition(rigidbody.position + pos * (Time.deltaTime * 20));
 
             var dir = pos.x > 0 ? 1 : (pos.x < 0 ? -1 : 0);
+            if (dir != 0 && currentMove != idleMove)
+                SetIdle();
             if (playerId == 2)
                 dir = -dir;
             
@@ -196,6 +206,12 @@ public class Player : MonoBehaviour
 
         if (currentMove.duration >= 0 && currentFrame > currentMove.duration)
             SetIdle();
+
+        //Update UI
+        var leftPlayer = playerId == 1;
+        var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
+
+        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
     }
 
 }
