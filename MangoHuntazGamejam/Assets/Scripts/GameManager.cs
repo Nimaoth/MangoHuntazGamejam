@@ -94,8 +94,9 @@ public class GameManager : MonoBehaviour
         fightIntroImage.enabled = true;
         while (counter < introFadeSteps)
         {
-            float alpha = counter / introFadeSteps;
-            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, fightIntroImage.color.a);
+            float alpha = (float)counter / introFadeSteps;
+            fightIntroImage.color = new Color(fightIntroImage.color.r, fightIntroImage.color.g, fightIntroImage.color.b, alpha);
+            counter++;
             yield return new WaitForSeconds(delta);
         }
         yield return new WaitForSeconds(0.5f);
