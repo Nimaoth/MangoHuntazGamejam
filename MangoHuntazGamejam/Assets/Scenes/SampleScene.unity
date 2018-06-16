@@ -1473,10 +1473,18 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 1447466456}
   - component: {fileID: 1447466457}
   m_Layer: 20
   m_Name: Frame_Charge
+=======
+  - component: {fileID: 1479130608}
+  - component: {fileID: 1479130604}
+  - component: {fileID: 1479130606}
+  m_Layer: 11
+  m_Name: Renderer
+>>>>>>> 6f90ae12d0a0b489724458976b513e8ab36e47bc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1487,6 +1495,7 @@ Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1447466455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1709,6 +1718,8 @@ Animator:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+=======
+>>>>>>> 6f90ae12d0a0b489724458976b513e8ab36e47bc
   m_GameObject: {fileID: 1479130603}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
@@ -1721,6 +1732,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+<<<<<<< HEAD
 --- !u!61 &1479130605
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1746,6 +1758,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.914238, y: 11.604219}
   m_EdgeRadius: 0
+=======
+>>>>>>> 6f90ae12d0a0b489724458976b513e8ab36e47bc
 --- !u!212 &1479130606
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2044,7 +2058,8 @@ GameObject:
   - component: {fileID: 1589770873}
   - component: {fileID: 1589770874}
   - component: {fileID: 1589770875}
-  m_Layer: 0
+  - component: {fileID: 1589770876}
+  m_Layer: 11
   m_Name: Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2079,6 +2094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerId: 1
   attackZone: {fileID: 1766759649}
+  attackZoneActivated: 0
   isControllable: 0
   healthbarTransform: {fileID: 442275148}
   chargebarTransform: {fileID: 0}
@@ -2108,6 +2124,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!61 &1589770876
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589770872}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.17355156, y: 0.5341692}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 14, y: 14}
+    newSize: {x: 14, y: 14}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0801315, y: 2.2493362}
+  m_EdgeRadius: 0
 --- !u!1 &1630105378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,9 +2159,8 @@ GameObject:
   - component: {fileID: 1630105379}
   - component: {fileID: 1630105381}
   - component: {fileID: 1630105380}
-  - component: {fileID: 1630105382}
   m_Layer: 12
-  m_Name: Cube
+  m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2202,31 +2242,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &1630105382
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1630105378}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.247799, y: 0.3327475}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 20.48}
-    newSize: {x: 14, y: 14}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.914238, y: 11.60422}
-  m_EdgeRadius: 0
 --- !u!1 &1632873140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2785,7 +2800,8 @@ GameObject:
   - component: {fileID: 2083916442}
   - component: {fileID: 2083916441}
   - component: {fileID: 2083916443}
-  m_Layer: 0
+  - component: {fileID: 2083916444}
+  m_Layer: 12
   m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2805,6 +2821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerId: 2
   attackZone: {fileID: 312228068}
+  attackZoneActivated: 0
   isControllable: 0
   healthbarTransform: {fileID: 153153581}
   chargebarTransform: {fileID: 0}
@@ -2849,6 +2866,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+<<<<<<< HEAD
 --- !u!1 &2117445898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,3 +2948,30 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+=======
+--- !u!61 &2083916444
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2083916440}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.050245523, y: -0.24913406}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 20.48, y: 20.48}
+    newSize: {x: 14, y: 14}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9011016, y: 2.8312216}
+  m_EdgeRadius: 0
+>>>>>>> 6f90ae12d0a0b489724458976b513e8ab36e47bc
