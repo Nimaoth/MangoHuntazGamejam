@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
 
 
     public int MAX_HEALTH;
-    private int healthPlayer1;
-    private int healthPlayer2;
+    public int healthPlayer1;
+    public int healthPlayer2;
 
     //intro
     public int introFadeSteps;
