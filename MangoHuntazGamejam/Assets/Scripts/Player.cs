@@ -39,11 +39,8 @@ public class Player : MonoBehaviour
         rigidbody = transform.GetComponent<Rigidbody2D>();
     }
 
-    // Use this for initialization
-    void Start()
+    private void CreateMovesForClown(ref Move firstLightAttack, ref Move firstHeavyAttack)
     {
-        blockMove = new Move("Block", 30, 25, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
-
         var heavyAttackShort = new Move("HeavyAttackShort", 21, 17, 15, 1000, null, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
             4, 13, m_strongAttackRumbel)
@@ -81,9 +78,73 @@ public class Player : MonoBehaviour
         lightAttack3.displacementEnd = 4;
         lightAttack3.displacement = 0.75f;
 
-        staggerMove = new Move("Stagger", 15, 14, 0, 1000, lightAttack1, heavyAttackShort, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
+        firstLightAttack = lightAttack1;
+        firstHeavyAttack = heavyAttackLong;
+    }
 
-        idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackLong, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
+    private void CreateMovesForSerialkiller(ref Move firstLightAttack, ref Move firstHeavyAttack)
+    {
+        var heavyAttackShort = new Move("HeavyAttackShort", 21, 17, 15, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            4, 13, m_strongAttackRumbel)
+        { damage = 5 };
+
+        var heavyAttackLong = new Move("HeavyAttackLong", 32, 26, 20, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            14, 23, m_strongAttackRumbel)
+        { damage = 5 };
+
+        var lightAttack3 = new Move("LightAttack3", 15, 8, 5, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            5, 15, m_strongAttackRumbel)
+        { damage = 3 };
+
+        var lightAttack2 = new Move("LightAttack2", 15, 7, 5, 1000, lightAttack3, heavyAttackShort, blockMove,
+            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            3, 7, m_lightAttackRumbel)
+        { damage = 2 };
+
+        var lightAttack1 = new Move("LightAttack1", 15, 7, 5, 1000, lightAttack2, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            3, 7, m_lightAttackRumbel)
+        { damage = 1 };
+
+        lightAttack1.displacementStart = 1;
+        lightAttack1.displacementEnd = 3;
+        lightAttack1.displacement = 0.5f;
+
+        lightAttack2.displacementStart = 1;
+        lightAttack2.displacementEnd = 3;
+        lightAttack2.displacement = 0.5f;
+
+        lightAttack3.displacementStart = 1;
+        lightAttack3.displacementEnd = 4;
+        lightAttack3.displacement = 0.75f;
+
+        firstLightAttack = lightAttack1;
+        firstHeavyAttack = heavyAttackLong;
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        blockMove = new Move("Block", 30, 25, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
+
+        Move firstLightAttack = null;
+        Move firstHeavyAttack = null;
+
+        if (playerId == 1)
+        {
+            CreateMovesForSerialkiller(ref firstLightAttack, ref firstHeavyAttack);
+        }
+        else if (playerId == 2)
+        {
+            CreateMovesForSerialkiller(ref firstLightAttack, ref firstHeavyAttack);
+        }
+
+        staggerMove = new Move("Stagger", 15, 14, 0, 1000, firstLightAttack, firstHeavyAttack, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
+
+        idleMove = new Move("Idle", -1, -1, -1, -1, firstLightAttack, firstHeavyAttack, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
 
         currentMove = idleMove;
