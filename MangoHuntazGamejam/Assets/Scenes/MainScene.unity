@@ -184,6 +184,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &190906050 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
+    type: 2}
+  m_PrefabInternal: {fileID: 2143494812}
+  m_Script: {fileID: 11500000, guid: 89378656401b12c4798944768ea2c6d5, type: 3}
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,6 +1177,7 @@ MonoBehaviour:
   FightEndsImage: {fileID: 130827245}
   SKWinsImage: {fileID: 667175292}
   ClownWinsImage: {fileID: 426748693}
+  musicManager: {fileID: 190906050}
 --- !u!4 &1642224004
 Transform:
   m_ObjectHideFlags: 0
@@ -1658,3 +1665,50 @@ MonoBehaviour:
   beam: {fileID: 974638739}
   gold: {fileID: 663999392}
   chargebarTransform: {fileID: 1925470744}
+--- !u!1001 &2143494812
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
+        type: 2}
+      propertyPath: mainLoopSource
+      value: 
+      objectReference: {fileID: 282840812}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+  m_IsPrefabParent: 0
