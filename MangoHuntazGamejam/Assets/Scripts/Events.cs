@@ -14,10 +14,14 @@ public class PlayerHitEvent : System.EventArgs
     public DamageRumble rumbel { get; set; }
 }
 
+
+
 public class Events : MonoBehaviour {
 
-    public void Start()
+    public Events instance;
+    public void Awake()
     {
+        instance = this;
     }
 
     public static event EventHandler<PlayerHitEvent> playerHasBeenHit;
@@ -30,13 +34,20 @@ public class Events : MonoBehaviour {
         }
     }
 
-    //TODO
-    public UnityEvent CeddosSupremeGeilerUltraTest = new UnityEvent();
+   // public UnityEvent CeddosSupremeGeilerUltraTest = new UnityEvent();
 
-    public HasBeenHitEvent Player1HasBeenHit = new HasBeenHitEvent();
+   // public HasBeenHitEvent Player1HasBeenHit = new HasBeenHitEvent();
 
-    public Event PlayerWasHit = new Event();
+    //public UnityEvent PlayerWasHit = new UnityEvent();
 
-    public UnityEvent Player1Whiffs = new UnityEvent();
+    public UnityEvent Clown_Bite_Hit_Event = new UnityEvent();
+    public UnityEvent Clown_Bite_Miss_Event = new UnityEvent();
+    public UnityEvent Clown_Block_Event = new UnityEvent();
+    public UnityEvent Clown_HammerHit_Event = new UnityEvent();
+    public UnityEvent Clown_HammerMiss_Event = new UnityEvent();
+    public UnityEvent Clown_HammerSwing_Event = new UnityEvent();
+    public UnityEvent Clown_Laugh_Heavy_Event = new UnityEvent();
+    public UnityEvent Clown_Laugh_Light_Event = new UnityEvent();
+    //public UnityEvent Clown_HammerHit_Event = new UnityEvent();
 
 }
