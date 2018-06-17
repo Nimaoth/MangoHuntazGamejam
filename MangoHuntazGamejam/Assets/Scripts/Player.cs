@@ -91,6 +91,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        rigidbody.velocity = Vector2.zero;
+
         currentFrame++;
 
         if (currentMove.displacement != 0 && currentFrame >= currentMove.displacementStart && currentFrame <= currentMove.displacementEnd)
