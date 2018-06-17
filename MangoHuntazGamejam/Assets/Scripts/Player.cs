@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
         var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            0, 12, null)
+            0, 12, m_strongAttackRumbel)
         { damage = 5 };
 
         var heavyAttackLong = new Move("HeavyAttackLong", 18, 13, 10, 18, null, null, blockMove,
@@ -73,12 +73,12 @@ public class Player : MonoBehaviour
             20, 35, m_strongAttackRumbel)
         { damage = 3 };
 
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove,
+        var lightAttack2 = new Move("LightAttack2", 22, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove,
             new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
             0, 15, m_lightAttackRumbel)
         { damage = 2 };
 
-        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove,
+        var lightAttack1 = new Move("LightAttack1", 22, 10, 5, 20, lightAttack2, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(1, 2),
             0, 15, m_lightAttackRumbel)
         { damage = 1 };

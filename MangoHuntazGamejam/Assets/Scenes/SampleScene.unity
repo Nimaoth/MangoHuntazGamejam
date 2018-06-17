@@ -3275,7 +3275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ad8b4b123355a4a914477c769bca8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 2
+  playerId: 1
   attackZone: {fileID: 312228068}
   isControllable: 0
   healthbarTransform: {fileID: 1509214186}
