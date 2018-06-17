@@ -79,6 +79,12 @@ public class MusicManager : MonoBehaviour {
 
     public void PlaySound(string soundName, Vector3 pos)
     {
+        if (!soundDict.ContainsKey(soundName))
+        {
+            Debug.Log("Clip '" + soundName + "' does not exist");
+            return;
+        }
+
         AudioClip[] arr = soundDict[soundName];
         int index = Random.Range((int)0, (int)arr.Length);
 
@@ -87,6 +93,12 @@ public class MusicManager : MonoBehaviour {
 
     public void PlaySound(string soundName, Vector3 pos, float volume)
     {
+        if (!soundDict.ContainsKey(soundName))
+        {
+            Debug.Log("Clip '" + soundName + "' does not exist");
+            return;
+        }
+
         AudioClip[] arr = soundDict[soundName];
         int index = Random.Range((int)0, (int)arr.Length);
 
