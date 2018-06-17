@@ -39,6 +39,9 @@ public class Move {
 
     public DamageRumble m_damageRumble;
 
+    public string soundName;
+    public string missName;
+
     public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block, Vector2 attackZoneCenter, Vector2 attackZoneSize, int attackZoneStart, int attackZoneEnd, DamageRumble damageRumble)
     {
         this.name = name;
