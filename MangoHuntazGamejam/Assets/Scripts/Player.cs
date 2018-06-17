@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
             {
                 //activate Hitbox
                 attackZone.size = currentMove.attackZoneSize;
-                attackZone.offset = playerId == 1 ? currentMove.attackZoneCenter : -1 * currentMove.attackZoneCenter ;
+                attackZone.offset = playerId == 1 ? currentMove.attackZoneCenter : -1 * currentMove.attackZoneCenter;
                 attackZone.enabled = true;
                 attackZoneActivated = true;
                 attackZone.gameObject.GetComponent<AttackZone>().DoOnEnable();
@@ -225,18 +225,20 @@ public class Player : MonoBehaviour
                 dir = -dir;
 
             animator.SetInteger("Direction", dir);
+
+            if (InputManager.x_Button_down(playerId))
+                OnAttack(currentMove.onLightAttack);
+            if (InputManager.b_Button_down(playerId))
+                OnAttack(currentMove.onHeavyAttack);
+            if (InputManager.rb_Button_down(playerId))
+                OnAttack(currentMove.onBlock);
+
+            //Debug TODO
+            if (InputManager.y_Button_down(playerId))
+                Stagger(30);
         }
 
-        if (InputManager.x_Button_down(playerId))
-            OnAttack(currentMove.onLightAttack);
-        if (InputManager.b_Button_down(playerId))
-            OnAttack(currentMove.onHeavyAttack);
-        if (InputManager.rb_Button_down(playerId))
-            OnAttack(currentMove.onBlock);
 
-        //Debug TODO
-        if (InputManager.y_Button_down(playerId))
-            Stagger(30);
 
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
