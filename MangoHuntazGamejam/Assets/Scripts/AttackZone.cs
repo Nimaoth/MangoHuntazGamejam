@@ -60,6 +60,7 @@ public class AttackZone : MonoBehaviour
         {
             RumbleFeedback.beginRumble(player.playerId, player.currentMove.m_damageRumble);
             GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage, player.currentMove.m_damageRumble);
+            enemy.Stagger(player.currentMove.stunDuration);
         }
         else
         {

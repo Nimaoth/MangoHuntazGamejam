@@ -7,7 +7,7 @@ public class MusicManager : MonoBehaviour {
     private Dictionary<string, AudioClip[]> soundDict;
     private AudioSource audioSource;
     public AudioSource mainLoopSource;
-    [Range(0.0f, 0.15f)]
+    [Range(0.0f, 1f)]
     public float mainMusicVolume;
 
 

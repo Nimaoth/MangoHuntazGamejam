@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         {
             MoveCreator.CreateMovesForSerialkiller(ref firstLightAttack, ref firstHeavyAttack, blockMove, m_strongAttackRumbel, m_lightAttackRumbel);
         }
-        if (playerId == 1)
+        if (playerId == 2)
         {
             MoveCreator.CreateMovesForClown(ref firstLightAttack, ref firstHeavyAttack, blockMove, m_strongAttackRumbel, m_lightAttackRumbel);
         }
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
         attackZone.enabled = false;
     }
 
-    private void Stagger(int duration)
+    public void Stagger(int duration)
     {
         staggerMove.duration = duration;
         staggerMove.cancelTime = duration;

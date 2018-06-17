@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -278,9 +278,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 575a7c8fa5ba80542bddd039387247b1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7962df9d67368e34a96e02c505cbe141, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.02
+  m_Volume: 0.084
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicManager: {fileID: 190906050}
-  playerId: 2
+  playerId: 1
   attackZone: {fileID: 1766759649}
   isControllable: 0
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicManager: {fileID: 190906050}
-  playerId: 1
+  playerId: 2
   attackZone: {fileID: 312228068}
   isControllable: 0
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
@@ -1989,11 +1989,16 @@ Prefab:
     - target: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
         type: 2}
       propertyPath: mainMusicVolume
-      value: 0.0526
+      value: 0.224
       objectReference: {fileID: 0}
     - target: {fileID: 1130547230027656, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
       propertyPath: m_TagString
       value: MusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 82262631440536202, guid: 06d837ec861bde5418a0fb43166dde75,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.604
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
