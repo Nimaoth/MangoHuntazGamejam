@@ -2124,8 +2124,6 @@ MonoBehaviour:
   playerId: 1
   attackZone: {fileID: 1766759649}
   isControllable: 0
-  healthbarTransform: {fileID: 98273100}
-  chargebarTransform: {fileID: 1119717197}
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
   m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
     type: 2}
@@ -3275,11 +3273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ad8b4b123355a4a914477c769bca8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
+  playerId: 2
   attackZone: {fileID: 312228068}
   isControllable: 0
-  healthbarTransform: {fileID: 1509214186}
-  chargebarTransform: {fileID: 689443852}
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
   m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
     type: 2}
