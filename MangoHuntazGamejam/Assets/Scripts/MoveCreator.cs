@@ -34,7 +34,7 @@ public class MoveCreator {
         { damage = 2, soundName = "Clown_Bite_Hit", missName = "Clown_Bite_Miss", stunDuration = 10 };
 
         var lightAttack1 = new Move("LightAttack1", 21, 14, 5, 1000, lightAttack2, null, blockMove,
-            new Vector2(-1.0f, 0.5f), new Vector2(2, 1),
+            new Vector2(-3.0f, 0.5f), new Vector2(2, 1),
             9, 14, lightRumble)
         { damage = 1, soundName = "Clown_Bite_Hit", missName = "Clown_Bite_Miss", stunDuration = 10 };
 

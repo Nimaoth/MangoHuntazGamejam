@@ -224,9 +224,6 @@ public class Player : MonoBehaviour
 
 
 
-        //Debug TODO
-        if (InputManager.y_Button_down(playerId))
-            Stagger(30);
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
         {
