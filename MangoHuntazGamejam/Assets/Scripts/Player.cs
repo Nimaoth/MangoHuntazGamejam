@@ -73,12 +73,12 @@ public class Player : MonoBehaviour
             20, 35, m_strongAttackRumbel)
         { damage = 3 };
 
-        var lightAttack2 = new Move("LightAttack2", 22, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove,
+        var lightAttack2 = new Move("LightAttack2", 21, 15, 5, 20, lightAttack3, heavyAttackShort, blockMove,
             new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
             0, 15, m_lightAttackRumbel)
         { damage = 2 };
 
-        var lightAttack1 = new Move("LightAttack1", 22, 10, 5, 20, lightAttack2, null, blockMove,
+        var lightAttack1 = new Move("LightAttack1", 21, 15, 5, 20, lightAttack2, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(1, 2),
             0, 15, m_lightAttackRumbel)
         { damage = 1 };
@@ -158,17 +158,22 @@ public class Player : MonoBehaviour
 
         if (!currentMove.loop && (currentFrame < currentMove.inputTimeStart || currentFrame > currentMove.inputTimeEnd))
             return;
-
+        
         if (currentFrame > currentMove.cancelTime)
             transitionTime = currentFrame;
         else
+        {
             transitionTime = currentMove.cancelTime;
+        }
 
         nextMove = next;
     }
 
     private void NextMove(Move m)
     {
+        if (m == null)
+            m = idleMove;
+
         animator.SetTrigger(m.name);
 
         transitionTime = -1;
@@ -226,18 +231,17 @@ public class Player : MonoBehaviour
 
             animator.SetInteger("Direction", dir);
 
-            if (InputManager.x_Button_down(playerId))
-                OnAttack(currentMove.onLightAttack);
-            if (InputManager.b_Button_down(playerId))
-                OnAttack(currentMove.onHeavyAttack);
-            if (InputManager.rb_Button_down(playerId))
-                OnAttack(currentMove.onBlock);
-
             //Debug TODO
             if (InputManager.y_Button_down(playerId))
                 Stagger(30);
         }
 
+        if (InputManager.x_Button_down(playerId))
+            OnAttack(currentMove.onLightAttack);
+        if (InputManager.b_Button_down(playerId))
+            OnAttack(currentMove.onHeavyAttack);
+        if (InputManager.rb_Button_down(playerId))
+            OnAttack(currentMove.onBlock);
 
 
 
