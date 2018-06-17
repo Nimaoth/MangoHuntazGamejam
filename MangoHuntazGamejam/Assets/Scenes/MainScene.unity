@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -226,7 +226,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 575a7c8fa5ba80542bddd039387247b1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1159,7 +1159,7 @@ MonoBehaviour:
   player2: {fileID: 2083916441}
   Player1Spawn: {fileID: 675556487}
   Player2Spawn: {fileID: 1288015000}
-  MAX_HEALTH: 100
+  MAX_HEALTH: 10
   CHARGE_NECESSARY: 0
   DAMAGE_REDUCTION_ON_BLOCK: 0
   healthPlayer1: 0
@@ -1170,8 +1170,8 @@ MonoBehaviour:
   specialP2Active: 0
   damageReductionP1: 0
   damageReductionP2: 0
-  introFadeSteps: 0
-  introFadeDuration: 0
+  introFadeSteps: 50
+  introFadeDuration: 1.3
   fightIntroImage: {fileID: 1067310978}
   fightImage: {fileID: 1540280539}
   FightEndsImage: {fileID: 130827245}
@@ -1472,6 +1472,30 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114703302200052534, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ae834baffd173544aba50abf0bcc63f9,
+        type: 3}
+    - target: {fileID: 114420207727961824, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 105833c983e637a4b895d2db0dc4622d,
+        type: 3}
+    - target: {fileID: 114424932918315896, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b6de1e02b39fbdd4fb25e45dcd81cfa6,
+        type: 3}
+    - target: {fileID: 114650447116054502, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 846ca9822b2c01643b79dd1e65f865b7,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ba56e926c9a2f049b74431eaf65311f, type: 2}
   m_IsPrefabParent: 0
@@ -1709,6 +1733,11 @@ Prefab:
       propertyPath: mainLoopSource
       value: 
       objectReference: {fileID: 282840812}
+    - target: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
+        type: 2}
+      propertyPath: mainMusicVolume
+      value: 0.0526
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
   m_IsPrefabParent: 0
