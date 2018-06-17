@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -1506,6 +1506,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &939259811
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
+        type: 2}
+      propertyPath: mainLoopSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130547230027656, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_Name
+      value: MusicManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130547230027656, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_TagString
+      value: MusicManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1115281570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,7 +2041,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 87d25c6e0fcaf184880532c1eac348bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e14d4a3f2f5ffb34c8eaf5333a45b1af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2121,11 +2176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ad8b4b123355a4a914477c769bca8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerId: 1
+  playerId: 2
   attackZone: {fileID: 1766759649}
   isControllable: 0
-  healthbarTransform: {fileID: 98273100}
-  chargebarTransform: {fileID: 1119717197}
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
   m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
     type: 2}
@@ -2282,13 +2335,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1630105378}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children: []
   m_Father: {fileID: 2083916442}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1630105380
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2401,6 +2454,7 @@ MonoBehaviour:
   FightEndsImage: {fileID: 2059988581}
   SKWinsImage: {fileID: 115752835}
   ClownWinsImage: {fileID: 1880452217}
+  musicManager: {fileID: 0}
 --- !u!4 &1632873142
 Transform:
   m_ObjectHideFlags: 0
@@ -3278,8 +3332,6 @@ MonoBehaviour:
   playerId: 1
   attackZone: {fileID: 312228068}
   isControllable: 0
-  healthbarTransform: {fileID: 1509214186}
-  chargebarTransform: {fileID: 689443852}
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
   m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
     type: 2}
