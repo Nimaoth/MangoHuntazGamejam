@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
 
             if (healthPlayer1 <= 0)
             {
-                RumbleFeedback.beginRumble(playerID, damageRumble);
+                RumbleFeedback.beginRumble(1, player1.m_deathRumbel);
                 EndGame(2);
                 return;
             }
@@ -142,12 +142,12 @@ public class GameManager : MonoBehaviour
             healthPlayer2 -= damage;
             if (healthPlayer2 <= 0)
             {
-                RumbleFeedback.beginRumble(playerID, damageRumble);
+                RumbleFeedback.beginRumble(2, player1.m_deathRumbel);
                 EndGame(1);
                 return;
             }
         }
-        RumbleFeedback.beginRumble(playerID,damageRumble);
+        RumbleFeedback.beginRumble(playerID, damageRumble);
         Debug.Log("p1: " + healthPlayer1 + ", p2: " + healthPlayer2);
     }
     //call from Player.cs when the corresponding player missed a hit/was blocked

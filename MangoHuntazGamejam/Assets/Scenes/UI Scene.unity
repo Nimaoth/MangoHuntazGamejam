@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -663,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &296051538
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1724,7 +1724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1148589128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   playerId: 1
   attackZone: {fileID: 1766759649}
   isControllable: 0
-  healthbarTransform: {fileID: 1009992688}
+  healthbarTransform: {fileID: 846240404}
   chargebarTransform: {fileID: 1148589128}
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
   m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
@@ -2788,7 +2788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 0}
+  m_AnchoredPosition: {x: 308, y: 0}
   m_SizeDelta: {x: 204, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1768446906
@@ -3357,7 +3357,7 @@ MonoBehaviour:
   playerId: 2
   attackZone: {fileID: 312228068}
   isControllable: 0
-  healthbarTransform: {fileID: 1009992688}
+  healthbarTransform: {fileID: 153153581}
   chargebarTransform: {fileID: 296051538}
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
   m_lightAttackRumbel: {fileID: 11400000, guid: 1f1539c1bcd02a9469b2ddc8d1f289c0,
@@ -3457,7 +3457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -61.46, y: 0}
+  m_AnchoredPosition: {x: -61.45999, y: 0}
   m_SizeDelta: {x: 204, y: 20}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2117282251
