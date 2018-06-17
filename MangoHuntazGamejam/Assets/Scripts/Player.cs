@@ -31,11 +31,14 @@ public class Player : MonoBehaviour
 
     public Transform healthbarTransform;
     private Vector3 healthbarOrigin;
+    //[SerializeField]
     private Image stars;
+    //[SerializeField]
     private Image beam;
-    private float startime=0.02f;
+    private float startime = 0.02f;
     private float beamtime;
-    private GameObject   gold;
+    //[SerializeField]
+    private GameObject gold;
     public Transform chargebarTransform;
     private Vector3 chargebarOrigin;
     public DamageRumble m_deathRumbel;
@@ -47,36 +50,39 @@ public class Player : MonoBehaviour
     {
         animator = transform.GetComponentInChildren<Animator>();
         rigidbody = transform.GetComponent<Rigidbody2D>();
-        stars = chargebarTransform.Find("Background/Foreground/stars").GetComponent<Image>();
-        beam = chargebarTransform.Find("Background/Foreground/light").GetComponent<Image>();
-        gold = chargebarTransform.Find("Gold").gameObject;
+        //gold = chargebarTransform.Find("Gold").gameObject;
     }
 
     // Use this for initialization
     void Start()
     {
-        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
+        blockMove = new Move("Block", 30, 25, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
-        var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove, 
-            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f), 
-            0, 12, null) { damage = 5 };
+        var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            0, 12, m_strongAttackRumbel)
+        { damage = 5 };
 
         var heavyAttackLong = new Move("HeavyAttackLong", 18, 13, 10, 18, null, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            0, 18, m_strongAttackRumbel) { damage = 5 };
+            0, 18, m_strongAttackRumbel)
+        { damage = 5 };
 
         var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove,
             new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
-            20, 35, m_strongAttackRumbel) { damage = 3 };
+            20, 35, m_strongAttackRumbel)
+        { damage = 3 };
 
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove,
+        var lightAttack2 = new Move("LightAttack2", 21, 15, 5, 20, lightAttack3, heavyAttackShort, blockMove,
             new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
-            0, 15, m_lightAttackRumbel) { damage = 2 };
+            0, 15, m_lightAttackRumbel)
+        { damage = 2 };
 
-        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove,
+        var lightAttack1 = new Move("LightAttack1", 21, 15, 5, 20, lightAttack2, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(1, 2),
-            0, 15, m_lightAttackRumbel) { damage = 1 };
-        
+            0, 15, m_lightAttackRumbel)
+        { damage = 1 };
+
         lightAttack1.displacementStart = 1;
         lightAttack1.displacementEnd = 3;
         lightAttack1.displacement = 1.0f;
@@ -93,10 +99,11 @@ public class Player : MonoBehaviour
 
         idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackLong, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
-        
+
         currentMove = idleMove;
 
         healthbarOrigin = healthbarTransform.position;
+
         chargebarOrigin = chargebarTransform.position;
         if (playerId == 2)
         {
@@ -115,16 +122,16 @@ public class Player : MonoBehaviour
             var dis = currentMove.displacement / displacementDur;
             if (playerId == 2)
                 dis = -dis;
-            rigidbody.MovePosition(rigidbody.position + new Vector2(dis, 0));
+            //rigidbody.MovePosition(rigidbody.position + new Vector2(dis, 0));
         }
 
-        if(!attackZoneActivated)
+        if (!attackZoneActivated)
         {
-            if((currentFrame >= currentMove.attackZoneStart))
+            if ((currentFrame >= currentMove.attackZoneStart))
             {
                 //activate Hitbox
                 attackZone.size = currentMove.attackZoneSize;
-                attackZone.offset = currentMove.attackZoneCenter;
+                attackZone.offset = playerId == 1 ? currentMove.attackZoneCenter : -1 * currentMove.attackZoneCenter;
                 attackZone.enabled = true;
                 attackZoneActivated = true;
                 attackZone.gameObject.GetComponent<AttackZone>().DoOnEnable();
@@ -148,20 +155,25 @@ public class Player : MonoBehaviour
 
         if (isStunned)
             return;
-        
+
         if (!currentMove.loop && (currentFrame < currentMove.inputTimeStart || currentFrame > currentMove.inputTimeEnd))
             return;
-
+        
         if (currentFrame > currentMove.cancelTime)
             transitionTime = currentFrame;
         else
+        {
             transitionTime = currentMove.cancelTime;
+        }
 
         nextMove = next;
     }
 
     private void NextMove(Move m)
     {
+        if (m == null)
+            m = idleMove;
+
         animator.SetTrigger(m.name);
 
         transitionTime = -1;
@@ -208,7 +220,7 @@ public class Player : MonoBehaviour
                 pos.x = -1;
             else if (pos.x > 0)
                 pos.x = 1;
-            
+
             rigidbody.MovePosition(rigidbody.position + pos * (Time.deltaTime * 20));
 
             var dir = pos.x > 0 ? 1 : (pos.x < 0 ? -1 : 0);
@@ -216,10 +228,14 @@ public class Player : MonoBehaviour
                 NextMove(idleMove);
             if (playerId == 2)
                 dir = -dir;
-            
+
             animator.SetInteger("Direction", dir);
+
+            //Debug TODO
+            if (InputManager.y_Button_down(playerId))
+                Stagger(30);
         }
-        
+
         if (InputManager.x_Button_down(playerId))
             OnAttack(currentMove.onLightAttack);
         if (InputManager.b_Button_down(playerId))
@@ -227,9 +243,6 @@ public class Player : MonoBehaviour
         if (InputManager.rb_Button_down(playerId))
             OnAttack(currentMove.onBlock);
 
-        //Debug TODO
-        if (InputManager.y_Button_down(playerId))
-            Stagger(30);
 
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
@@ -244,66 +257,67 @@ public class Player : MonoBehaviour
                 next = idleMove;
             NextMove(next);
         }
-        
+
         //Update UI
         var leftPlayer = playerId == 1;
         var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
-        var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
-        var currentColor = chargebarTransform.GetComponent<SpriteRenderer>().color;
-        Color newColor;
-        if (playerId==2)
-        newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP2Active ? 1f : 0f);
-        else
-        newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f);
+        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
 
-        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4), 0);
-        chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? -4 : 4), 0);
+        //var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
+        //var currentColor = chargebarTransform.GetComponent<Image>().color;
+        //Color newColor;
+        //if (playerId == 2)
+        //{ newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP2Active ? 1f : 0f); }
+        //else
+        //{ newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f); }
 
-        chargebarTransform.GetComponent<SpriteRenderer>().color = newColor;
-        if (!animatedExists)
-       StartCoroutine("Animate");
+        //chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
+
+        //chargebarTransform.GetComponent<Image>().color = newColor;
+        //if (!animatedExists)
+        //    StartCoroutine("Animate");
     }
     public Move getBlockMove()
     {
         return blockMove;
     }
-    public IEnumerator Animate()
-    {
-        animatedExists = true;
-        while (true)
-        {
-            if (playerId == 1)
-            {
-                beamtime += 0.01f;
-                beamtime %= 1.0f;
-                startime += 0.008f;
-                startime %= 1.0f;
-            }
-            else
-            {
-                beamtime -= 0.01f;
-                if (beamtime <= 0)
-                    beamtime = 1f;
-                startime -= 0.008f;
-                if (startime <= 0)
-                    startime = 1f;
+    //public IEnumerator Animate()
+    //{
+    //    animatedExists = true;
+    //    while (true)
+    //    {
+    //        if (playerId == 1)
+    //        {
+    //            beamtime += 0.01f;
+    //            beamtime %= 1.0f;
+    //            startime += 0.008f;
+    //            startime %= 1.0f;
+    //        }
+    //        else
+    //        {
+    //            beamtime -= 0.01f;
+    //            if (beamtime <= 0)
+    //                beamtime = 1f;
+    //            startime -= 0.008f;
+    //            if (startime <= 0)
+    //                startime = 1f;
 
-            }
-            
-            beam.material.SetFloat("_GlowPos", beamtime);
-            beam.material.SetFloat("_GlowWidth", 0.085f);
-            stars.material.SetFloat("_GlowPos", startime);
-            if (playerId == 1)
-            {
-                gold.SetActive(GameManager.instance.specialP1Active);
-                stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP1Active ? 0.14f : 0.0f);
-            }
-            else
-            {
-                gold.SetActive( GameManager.instance.specialP2Active);
-                stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP2Active ? 0.14f : 0.0f);
-            }
-            yield return null;
-        }
-    }
+    //        }
+
+    //        beam.material.SetFloat("_GlowPos", beamtime);
+    //        beam.material.SetFloat("_GlowWidth", 0.085f);
+    //        stars.material.SetFloat("_GlowPos", startime);
+    //        if (playerId == 1)
+    //        {
+    //            gold.SetActive(GameManager.instance.specialP1Active);
+    //            stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP1Active ? 0.14f : 0.0f);
+    //        }
+    //        else
+    //        {
+    //            gold.SetActive(GameManager.instance.specialP2Active);
+    //            stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP2Active ? 0.14f : 0.0f);
+    //        }
+    //        yield return null;
+    //    }
+    //}
 }

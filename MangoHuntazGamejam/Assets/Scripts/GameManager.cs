@@ -88,6 +88,10 @@ public class GameManager : MonoBehaviour
 
         P1Pos = Player1Spawn.transform.position;
         P2Pos = Player2Spawn.transform.position;
+
+        player1.transform.position = P1Pos;
+        player2.transform.position = P2Pos;
+
         healthPlayer1 = MAX_HEALTH;
         healthPlayer2 = MAX_HEALTH;
 
@@ -132,7 +136,7 @@ public class GameManager : MonoBehaviour
 
             if (healthPlayer1 <= 0)
             {
-                RumbleFeedback.beginRumble(playerID, damageRumble);
+                RumbleFeedback.beginRumble(2, player1.m_deathRumbel);
                 EndGame(2);
                 return;
             }
@@ -142,12 +146,12 @@ public class GameManager : MonoBehaviour
             healthPlayer2 -= damage;
             if (healthPlayer2 <= 0)
             {
-                RumbleFeedback.beginRumble(playerID, damageRumble);
+                RumbleFeedback.beginRumble(1, player1.m_deathRumbel);
                 EndGame(1);
                 return;
             }
         }
-        RumbleFeedback.beginRumble(playerID,damageRumble);
+        RumbleFeedback.beginRumble(playerID, damageRumble);
         Debug.Log("p1: " + healthPlayer1 + ", p2: " + healthPlayer2);
     }
     //call from Player.cs when the corresponding player missed a hit/was blocked
@@ -200,6 +204,7 @@ public class GameManager : MonoBehaviour
     void NewRound()
     {
         //todo
+        StartFight();
         Debug.Log("newround");
     }
     void OnEnable()
