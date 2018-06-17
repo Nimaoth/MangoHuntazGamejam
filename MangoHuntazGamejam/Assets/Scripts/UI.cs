@@ -42,17 +42,17 @@ public class UI : MonoBehaviour
 
         var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
         var currentColor = chargebarTransform.GetComponent<Image>().color;
-        Color newColor;
-        if (player.playerId == 2)
-        {
-            newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP2Active ? 1f : 0f);
-        }
-        else
-        { newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f); }
+        //Color newColor;
+        //if (player.playerId == 2)
+        //{
+        //    newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP2Active ? 1f : 0f);
+        //}
+        //else
+        //{ newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f); }
 
-        chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
+        chargebarTransform.position = chargebarOrigin + new Vector3(charge / 100.0f * (leftPlayer ? -1f : 1f) * 200.0f, 0);
 
-        chargebarTransform.GetComponent<Image>().color = newColor;
+        //chargebarTransform.GetComponent<Image>().color = newColor;
         if (!animatedExists)
             StartCoroutine("Animate");
     }
