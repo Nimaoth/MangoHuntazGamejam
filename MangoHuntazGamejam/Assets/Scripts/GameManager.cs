@@ -142,6 +142,20 @@ public class GameManager : MonoBehaviour
     {
         if (playerID == 1)
         {
+
+
+            musicManager.PlaySound(player2.currentMove.soundName, player2.transform.position);
+            
+            if(player2.currentMove.name == "HeavyAttackShort" || player2.currentMove.name == "HeavyAttackLong")
+            {
+                if (Random.Range(0.0f, 1.0f) > 0.5f)
+                {
+                    musicManager.PlaySound("Clown_Laugh_Heavy", player2.transform.position);
+                }
+            }
+
+
+
             healthPlayer1 -= damage;
 
             if (healthPlayer1 <= 0)
@@ -153,6 +167,18 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+
+            musicManager.PlaySound(player1.currentMove.soundName, player1.transform.position);
+
+
+            if (player1.currentMove.name == "HeavyAttackShort" || player1.currentMove.name == "HeavyAttackLong")
+            {
+                if (Random.Range(0.0f, 1.0f) > 0.5f)
+                {
+                    musicManager.PlaySound("SK_Breath_Heavy", player2.transform.position);
+                }
+            }
+
             healthPlayer2 -= damage;
             if (healthPlayer2 <= 0)
             {
@@ -168,6 +194,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerID == 1)
         {
+            //musicManager.PlaySound(player1.currentMove.missName, player1.transform.position);
             specialChargeP1++;
             specialChargeP1 = Mathf.Clamp(specialChargeP1, 0, 100);
         }
@@ -175,6 +202,8 @@ public class GameManager : MonoBehaviour
 
         if (playerID == 2)
         {
+            //musicManager.PlaySound(player2.currentMove.missName, player2.transform.position);
+
             specialChargeP2++;
             specialChargeP2 = Mathf.Clamp(specialChargeP2, 0, 100);
         }
@@ -219,7 +248,20 @@ public class GameManager : MonoBehaviour
 
         SKWinsImage.enabled = false;
         ClownWinsImage.enabled = false;
-        yield return new WaitForSeconds(0.5f);
+
+        musicManager.mainLoopSource.volume = 0.01f;
+        if(winnerID == 1)
+        {
+            musicManager.PlaySound("SK_Breath_Win", player1.transform.position, 2.0f);
+        }
+        else
+        {
+            musicManager.PlaySound("Clown_Laugh_Win", player1.transform.position, 2.0f);
+
+        }
+
+
+        yield return new WaitForSeconds(3.0f);
         NewRound();
     }
 

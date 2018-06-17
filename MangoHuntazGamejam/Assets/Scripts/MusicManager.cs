@@ -85,6 +85,14 @@ public class MusicManager : MonoBehaviour {
         AudioSource.PlayClipAtPoint(arr[index], pos);
     }
 
+    public void PlaySound(string soundName, Vector3 pos, float volume)
+    {
+        AudioClip[] arr = soundDict[soundName];
+        int index = Random.Range((int)0, (int)arr.Length);
+
+        AudioSource.PlayClipAtPoint(arr[index], pos, volume);
+    }
+
     public void PlayTerror()
     {
         audioSource.clip = TerrorReign[0];

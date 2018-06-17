@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+
+    public MusicManager musicManager;
     private Animator animator;
 
     [SerializeField]
@@ -33,10 +35,101 @@ public class Player : MonoBehaviour
     public DamageRumble m_strongAttackRumbel;
     public DamageRumble m_blockRumbel;
 
+    float soundTimer = 0.0f;
+    float soundTimerThreshold;
+
     void Awake()
     {
         animator = transform.GetComponentInChildren<Animator>();
         rigidbody = transform.GetComponent<Rigidbody2D>();
+
+        soundTimerThreshold = Random.Range(3.0f, 5.0f);
+    }
+
+    private void CreateMovesForClown(ref Move firstLightAttack, ref Move firstHeavyAttack)
+    {
+        var heavyAttackShort = new Move("HeavyAttackShort", 21, 17, 15, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            4, 13, m_strongAttackRumbel)
+        { damage = 5, soundName = "Clown_Hammer_Hit", missName = "Clown_Hammer_Miss" };
+
+        var heavyAttackLong = new Move("HeavyAttackLong", 32, 26, 20, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            14, 23, m_strongAttackRumbel)
+        { damage = 5, soundName = "Clown_Hammer_Hit", missName = "Clown_Hammer_Miss" };
+
+        var lightAttack3 = new Move("LightAttack3", 15, 8, 5, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            5, 15, m_strongAttackRumbel)
+        { damage = 3, soundName = "Clown_Bite_Hit" , missName = "Clown_Bite_Miss" };
+
+        var lightAttack2 = new Move("LightAttack2", 15, 7, 5, 1000, lightAttack3, heavyAttackShort, blockMove,
+            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            3, 7, m_lightAttackRumbel)
+        { damage = 2, soundName = "Clown_Bite_Hit", missName = "Clown_Bite_Miss" };
+
+        var lightAttack1 = new Move("LightAttack1", 15, 7, 5, 1000, lightAttack2, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            3, 7, m_lightAttackRumbel)
+        { damage = 1, soundName = "Clown_Bite_Hit", missName = "Clown_Bite_Miss" };
+
+        lightAttack1.displacementStart = 1;
+        lightAttack1.displacementEnd = 3;
+        lightAttack1.displacement = 0.5f;
+
+        lightAttack2.displacementStart = 1;
+        lightAttack2.displacementEnd = 3;
+        lightAttack2.displacement = 0.5f;
+
+        lightAttack3.displacementStart = 1;
+        lightAttack3.displacementEnd = 4;
+        lightAttack3.displacement = 0.75f;
+
+        firstLightAttack = lightAttack1;
+        firstHeavyAttack = heavyAttackLong;
+    }
+
+    private void CreateMovesForSerialkiller(ref Move firstLightAttack, ref Move firstHeavyAttack)
+    {
+        var heavyAttackShort = new Move("HeavyAttackShort", 21, 17, 15, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            4, 13, m_strongAttackRumbel)
+        { damage = 5, soundName = "SK_Scythe_Hit", missName = "SK_Scythe_Miss" };
+
+        var heavyAttackLong = new Move("HeavyAttackLong", 32, 26, 20, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            14, 23, m_strongAttackRumbel)
+        { damage = 5, soundName = "SK_Scythe_Hit", missName = "SK_Scythe_Miss" };
+
+        var lightAttack3 = new Move("LightAttack3", 15, 8, 5, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            5, 15, m_strongAttackRumbel)
+        { damage = 3, soundName = "SK_Machete_Hit", missName = "SK_Machete_Miss" };
+
+        var lightAttack2 = new Move("LightAttack2", 15, 7, 5, 1000, lightAttack3, heavyAttackShort, blockMove,
+            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            3, 7, m_lightAttackRumbel)
+        { damage = 2, soundName = "SK_Machete_Hit", missName = "SK_Machete_Miss" };
+
+        var lightAttack1 = new Move("LightAttack1", 15, 7, 5, 1000, lightAttack2, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            3, 7, m_lightAttackRumbel)
+        { damage = 1, soundName = "SK_Machete_Hit", missName = "SK_Machete_Miss" };
+
+        lightAttack1.displacementStart = 1;
+        lightAttack1.displacementEnd = 3;
+        lightAttack1.displacement = 0.5f;
+
+        lightAttack2.displacementStart = 1;
+        lightAttack2.displacementEnd = 3;
+        lightAttack2.displacement = 0.5f;
+
+        lightAttack3.displacementStart = 1;
+        lightAttack3.displacementEnd = 4;
+        lightAttack3.displacement = 0.75f;
+
+        firstLightAttack = lightAttack1;
+        firstHeavyAttack = heavyAttackLong;
     }
 
     // Use this for initialization
@@ -66,6 +159,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        
         rigidbody.velocity = Vector2.zero;
 
         currentFrame++;
@@ -100,6 +195,7 @@ public class Player : MonoBehaviour
             }
         }
 
+
     }
 
     private void OnAttack(Move next)
@@ -132,6 +228,10 @@ public class Player : MonoBehaviour
 
         transitionTime = -1;
         currentMove = m;
+        if(currentMove.missName != null)
+        {
+            musicManager.PlaySound(currentMove.missName, transform.position);
+        }
         nextMove = null;
         currentFrame = 0;
         attackZoneActivated = false;
@@ -163,6 +263,26 @@ public class Player : MonoBehaviour
     {
         if (CanMove())
         {
+
+            soundTimer += Time.deltaTime;
+            if(soundTimer > soundTimerThreshold)
+            {
+                if(playerId ==1)
+                {
+                    musicManager.PlaySound("SK_Breath_Light", transform.position, 0.5f);
+                }
+                else
+                {
+                    musicManager.PlaySound("Clown_Laugh_Light", transform.position, 0.5f);
+
+                }
+
+                soundTimerThreshold = Random.Range(3.0f, 5.0f);
+                soundTimer = 0.0f;
+            }
+
+
+
             var pos = new Vector2();
             pos.x = InputManager.horizontal(playerId);
             if (pos.x < 0)
