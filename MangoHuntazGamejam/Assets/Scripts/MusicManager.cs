@@ -85,6 +85,11 @@ public class MusicManager : MonoBehaviour {
             return;
         }
 
+        if (soundName == null)
+        {
+            return;
+        }
+
         AudioClip[] arr = soundDict[soundName];
         int index = Random.Range((int)0, (int)arr.Length);
 
@@ -96,6 +101,11 @@ public class MusicManager : MonoBehaviour {
         if (!soundDict.ContainsKey(soundName))
         {
             Debug.Log("Clip '" + soundName + "' does not exist");
+            return;
+        }
+
+        if (soundName == null)
+        {
             return;
         }
 
