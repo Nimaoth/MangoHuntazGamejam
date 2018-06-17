@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         lightAttack3.displacementEnd = 4;
         lightAttack3.displacement = 1.25f;
 
-        staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
+        staggerMove = new Move("Stagger", 15, 14, 0, 1000, lightAttack1, heavyAttackShort, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
         idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackLong, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
@@ -186,12 +186,9 @@ public class Player : MonoBehaviour
 
     private void Stagger(int duration)
     {
-        //SetIdle();    
-        NextMove(idleMove);
         staggerMove.duration = duration;
-        currentMove = staggerMove;
-
-        animator.SetTrigger(staggerMove.name);
+        staggerMove.cancelTime = duration;
+        NextMove(staggerMove);
     }
 
 
@@ -230,10 +227,6 @@ public class Player : MonoBehaviour
                 dir = -dir;
 
             animator.SetInteger("Direction", dir);
-
-            //Debug TODO
-            if (InputManager.y_Button_down(playerId))
-                Stagger(30);
         }
 
         if (InputManager.x_Button_down(playerId))
@@ -244,6 +237,10 @@ public class Player : MonoBehaviour
             OnAttack(currentMove.onBlock);
 
 
+
+        //Debug TODO
+        if (InputManager.y_Button_down(playerId))
+            Stagger(100);
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
         {
