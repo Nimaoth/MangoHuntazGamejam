@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicManager: {fileID: 190906050}
-  playerId: 1
+  playerId: 2
   attackZone: {fileID: 1766759649}
   isControllable: 0
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicManager: {fileID: 190906050}
-  playerId: 2
+  playerId: 1
   attackZone: {fileID: 312228068}
   isControllable: 0
   m_deathRumbel: {fileID: 11400000, guid: 1f75eb7f4e261144bb9df7b47a52280f, type: 2}
@@ -1990,6 +1990,10 @@ Prefab:
         type: 2}
       propertyPath: mainMusicVolume
       value: 0.0526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130547230027656, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_TagString
+      value: MusicManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
