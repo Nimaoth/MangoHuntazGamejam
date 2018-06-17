@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
+        blockMove = new Move("Block", 30, 25, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
         var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
