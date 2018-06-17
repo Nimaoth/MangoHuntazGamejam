@@ -27,20 +27,7 @@ public class Player : MonoBehaviour
     private new Rigidbody2D rigidbody;
 
     public bool isControllable = false;
-    private bool animatedExists = false;
 
-    public Transform healthbarTransform;
-    private Vector3 healthbarOrigin;
-    //[SerializeField]
-    private Image stars;
-    //[SerializeField]
-    private Image beam;
-    private float startime = 0.02f;
-    private float beamtime;
-    //[SerializeField]
-    private GameObject gold;
-    public Transform chargebarTransform;
-    private Vector3 chargebarOrigin;
     public DamageRumble m_deathRumbel;
     public DamageRumble m_lightAttackRumbel;
     public DamageRumble m_strongAttackRumbel;
@@ -50,7 +37,6 @@ public class Player : MonoBehaviour
     {
         animator = transform.GetComponentInChildren<Animator>();
         rigidbody = transform.GetComponent<Rigidbody2D>();
-        //gold = chargebarTransform.Find("Gold").gameObject;
     }
 
     // Use this for initialization
@@ -101,15 +87,6 @@ public class Player : MonoBehaviour
         idleMove.loop = true;
 
         currentMove = idleMove;
-
-        healthbarOrigin = healthbarTransform.position;
-
-        chargebarOrigin = chargebarTransform.position;
-        if (playerId == 2)
-        {
-            beamtime = 1f;
-            startime = 1f;
-        }
     }
 
     void FixedUpdate()
@@ -191,8 +168,6 @@ public class Player : MonoBehaviour
         NextMove(staggerMove);
     }
 
-
-
     private bool CanMove()
     {
         if (!isControllable)
@@ -254,67 +229,9 @@ public class Player : MonoBehaviour
                 next = idleMove;
             NextMove(next);
         }
-
-        //Update UI
-        var leftPlayer = playerId == 1;
-        var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
-        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
-
-        //var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
-        //var currentColor = chargebarTransform.GetComponent<Image>().color;
-        //Color newColor;
-        //if (playerId == 2)
-        //{ newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP2Active ? 1f : 0f); }
-        //else
-        //{ newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f); }
-
-        //chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
-
-        //chargebarTransform.GetComponent<Image>().color = newColor;
-        //if (!animatedExists)
-        //    StartCoroutine("Animate");
     }
     public Move getBlockMove()
     {
         return blockMove;
     }
-    //public IEnumerator Animate()
-    //{
-    //    animatedExists = true;
-    //    while (true)
-    //    {
-    //        if (playerId == 1)
-    //        {
-    //            beamtime += 0.01f;
-    //            beamtime %= 1.0f;
-    //            startime += 0.008f;
-    //            startime %= 1.0f;
-    //        }
-    //        else
-    //        {
-    //            beamtime -= 0.01f;
-    //            if (beamtime <= 0)
-    //                beamtime = 1f;
-    //            startime -= 0.008f;
-    //            if (startime <= 0)
-    //                startime = 1f;
-
-    //        }
-
-    //        beam.material.SetFloat("_GlowPos", beamtime);
-    //        beam.material.SetFloat("_GlowWidth", 0.085f);
-    //        stars.material.SetFloat("_GlowPos", startime);
-    //        if (playerId == 1)
-    //        {
-    //            gold.SetActive(GameManager.instance.specialP1Active);
-    //            stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP1Active ? 0.14f : 0.0f);
-    //        }
-    //        else
-    //        {
-    //            gold.SetActive(GameManager.instance.specialP2Active);
-    //            stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP2Active ? 0.14f : 0.0f);
-    //        }
-    //        yield return null;
-    //    }
-    //}
 }
