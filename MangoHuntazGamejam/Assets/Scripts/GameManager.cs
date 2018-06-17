@@ -168,9 +168,17 @@ public class GameManager : MonoBehaviour
     public void OnMiss(int playerID)
     {
         if (playerID == 1)
-            specialChargeP2++;
-        if (playerID == 2)
+        {
             specialChargeP1++;
+            specialChargeP1 = Mathf.Clamp(specialChargeP2, 0, 100);
+        }
+
+
+        if (playerID == 2)
+        {
+            specialChargeP2++;
+            specialChargeP2 = Mathf.Clamp(specialChargeP1, 0, 100);
+        }
         if (specialChargeP1 >= CHARGE_NECESSARY)
             specialP1Active = true;
         else
