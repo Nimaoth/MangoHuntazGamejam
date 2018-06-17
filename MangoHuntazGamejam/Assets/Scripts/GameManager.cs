@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     public Image SKWinsImage;
     public Image ClownWinsImage;
 
+    public MusicManager musicManager;
+
     void Awake()
     {
         if (!created)
@@ -107,6 +109,7 @@ public class GameManager : MonoBehaviour
 
         int counter = 0;
         fightIntroImage.enabled = true;
+        musicManager.PlayTerror();
         while (counter < introFadeSteps)
         {
             float alpha = (float)counter / introFadeSteps;
@@ -120,6 +123,13 @@ public class GameManager : MonoBehaviour
         player2.isControllable = true;
 
         //play FightImage
+        musicManager.PlayHaunt();
+
+        if(musicManager.mainLoopSource.isPlaying)
+        {
+            musicManager.AmpMainLoop();
+        }
+
         fightImage.enabled = true;
         yield return new WaitForSeconds(0.5f);
         fightImage.enabled = false;
@@ -181,22 +191,28 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FightOutro(int winnerID)
     {
+        musicManager.DeAmpMainLoop();
+        musicManager.PlayNightmare();
+        yield return new WaitForSeconds(0.3f);
         FightEndsImage.enabled = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2.2f);
         FightEndsImage.enabled = false;
         if(winnerID == 1)
         {
+            musicManager.PlaySKWins();
             //SKwins?
             SKWinsImage.enabled = true;
         }
         else
         {
+            musicManager.PlayClownWins();
             ClownWinsImage.enabled = true;
         }
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.5f);
 
         SKWinsImage.enabled = false;
         ClownWinsImage.enabled = false;
+        yield return new WaitForSeconds(0.5f);
         NewRound();
     }
 
@@ -229,6 +245,7 @@ public class GameManager : MonoBehaviour
         {
             Player1Spawn = GameObject.FindGameObjectWithTag("Player1Spawn");
             Player2Spawn = GameObject.FindGameObjectWithTag("Player2Spawn");
+            musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
         }
     }
 
