@@ -67,6 +67,15 @@ public class AttackZone : MonoBehaviour
             GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage * (1 - GameManager.instance.DAMAGE_REDUCTION_ON_BLOCK), player.m_blockRumbel);
             GameManager.instance.OnMiss(player.playerId);
             Debug.Log("Blocked!");
+
+            if (enemyPlayerID == 1)
+            {
+                player.musicManager.PlaySound("SK_Block", enemy.transform.position);
+            }
+            if (enemyPlayerID == 2)
+            {
+                player.musicManager.PlaySound("Clown_Block", enemy.transform.position);
+            }
         }
     }
 }
