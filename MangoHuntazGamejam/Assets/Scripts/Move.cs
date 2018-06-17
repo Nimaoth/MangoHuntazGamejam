@@ -67,4 +67,9 @@ public class Move {
         this.onHeavyAttack = onHeavyAttack;
         this.onBlock = block;
     }
+
+    public override string ToString()
+    {
+        return name;
+    }
 }

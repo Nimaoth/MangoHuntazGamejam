@@ -42,11 +42,11 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        blockMove = new Move("Block", 30, 29, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
+        blockMove = new Move("Block", 30, 25, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
         var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            0, 12, null)
+            0, 12, m_strongAttackRumbel)
         { damage = 5 };
 
         var heavyAttackLong = new Move("HeavyAttackLong", 18, 13, 10, 18, null, null, blockMove,
@@ -59,12 +59,12 @@ public class Player : MonoBehaviour
             20, 35, m_strongAttackRumbel)
         { damage = 3 };
 
-        var lightAttack2 = new Move("LightAttack2", 20, 10, 5, 20, lightAttack3, heavyAttackShort, blockMove,
+        var lightAttack2 = new Move("LightAttack2", 21, 15, 5, 20, lightAttack3, heavyAttackShort, blockMove,
             new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
             0, 15, m_lightAttackRumbel)
         { damage = 2 };
 
-        var lightAttack1 = new Move("LightAttack1", 20, 10, 5, 20, lightAttack2, null, blockMove,
+        var lightAttack1 = new Move("LightAttack1", 21, 15, 5, 20, lightAttack2, null, blockMove,
             new Vector2(1.5f, 0.5f), new Vector2(1, 2),
             0, 15, m_lightAttackRumbel)
         { damage = 1 };
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
         lightAttack3.displacementEnd = 4;
         lightAttack3.displacement = 1.25f;
 
-        staggerMove = new Move("Stagger", 15, 14, 10, 15, lightAttack1, null, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
+        staggerMove = new Move("Stagger", 15, 14, 0, 1000, lightAttack1, heavyAttackShort, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
         idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackLong, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
@@ -135,17 +135,22 @@ public class Player : MonoBehaviour
 
         if (!currentMove.loop && (currentFrame < currentMove.inputTimeStart || currentFrame > currentMove.inputTimeEnd))
             return;
-
+        
         if (currentFrame > currentMove.cancelTime)
             transitionTime = currentFrame;
         else
+        {
             transitionTime = currentMove.cancelTime;
+        }
 
         nextMove = next;
     }
 
     private void NextMove(Move m)
     {
+        if (m == null)
+            m = idleMove;
+
         animator.SetTrigger(m.name);
 
         transitionTime = -1;
@@ -158,12 +163,9 @@ public class Player : MonoBehaviour
 
     private void Stagger(int duration)
     {
-        //SetIdle();    
-        NextMove(idleMove);
         staggerMove.duration = duration;
-        currentMove = staggerMove;
-
-        animator.SetTrigger(staggerMove.name);
+        staggerMove.cancelTime = duration;
+        NextMove(staggerMove);
     }
 
     private bool CanMove()
@@ -200,18 +202,20 @@ public class Player : MonoBehaviour
                 dir = -dir;
 
             animator.SetInteger("Direction", dir);
-
-            if (InputManager.x_Button_down(playerId))
-                OnAttack(currentMove.onLightAttack);
-            if (InputManager.b_Button_down(playerId))
-                OnAttack(currentMove.onHeavyAttack);
-            if (InputManager.rb_Button_down(playerId))
-                OnAttack(currentMove.onBlock);
-
-            //Debug TODO
-            if (InputManager.y_Button_down(playerId))
-                Stagger(30);
         }
+
+        if (InputManager.x_Button_down(playerId))
+            OnAttack(currentMove.onLightAttack);
+        if (InputManager.b_Button_down(playerId))
+            OnAttack(currentMove.onHeavyAttack);
+        if (InputManager.rb_Button_down(playerId))
+            OnAttack(currentMove.onBlock);
+
+
+
+        //Debug TODO
+        if (InputManager.y_Button_down(playerId))
+            Stagger(100);
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
         {
