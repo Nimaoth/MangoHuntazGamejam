@@ -50,7 +50,7 @@ public class UI : MonoBehaviour
         else
         { newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f); }
 
-        chargebarTransform.position = chargebarOrigin + new Vector3(charge / 100.0f * (leftPlayer ? -1f : 1f) * 200.0f, 0);
+        chargebarTransform.position = chargebarOrigin + new Vector3(charge / 100.0f * (leftPlayer ? - 1f :  1f) * 200.0f, 0);
 
         chargebarTransform.GetComponent<Image>().color = newColor;
         if (!animatedExists)
@@ -69,7 +69,7 @@ public class UI : MonoBehaviour
                 startime += 0.008f;
                 startime %= 1.0f;
             }
-            else
+            if (player.playerId == 2)
             {
                 beamtime -= 0.01f;
                 if (beamtime <= 0)
@@ -77,7 +77,6 @@ public class UI : MonoBehaviour
                 startime -= 0.008f;
                 if (startime <= 0)
                     startime = 1f;
-
             }
 
             beam.material.SetFloat("_GlowPos", beamtime);
