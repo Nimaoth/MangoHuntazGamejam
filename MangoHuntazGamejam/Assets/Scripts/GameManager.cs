@@ -162,15 +162,22 @@ public class GameManager : MonoBehaviour
             }
         }
         RumbleFeedback.beginRumble(playerID, damageRumble);
-        Debug.Log("p1: " + healthPlayer1 + ", p2: " + healthPlayer2);
     }
     //call from Player.cs when the corresponding player missed a hit/was blocked
     public void OnMiss(int playerID)
     {
         if (playerID == 1)
-            specialChargeP2++;
-        if (playerID == 2)
+        {
             specialChargeP1++;
+            specialChargeP1 = Mathf.Clamp(specialChargeP1, 0, 100);
+        }
+
+
+        if (playerID == 2)
+        {
+            specialChargeP2++;
+            specialChargeP2 = Mathf.Clamp(specialChargeP2, 0, 100);
+        }
         if (specialChargeP1 >= CHARGE_NECESSARY)
             specialP1Active = true;
         else

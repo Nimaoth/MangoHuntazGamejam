@@ -91,6 +91,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        rigidbody.velocity = Vector2.zero;
+
         currentFrame++;
 
         if (currentMove.displacement != 0 && currentFrame >= currentMove.displacementStart && currentFrame <= currentMove.displacementEnd)
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour
             var dis = currentMove.displacement / displacementDur;
             if (playerId == 2)
                 dis = -dis;
-            rigidbody.MovePosition(rigidbody.position + new Vector2(dis, 0));
+            //rigidbody.MovePosition(rigidbody.position + new Vector2(dis, 0));
         }
 
         if (!attackZoneActivated)
