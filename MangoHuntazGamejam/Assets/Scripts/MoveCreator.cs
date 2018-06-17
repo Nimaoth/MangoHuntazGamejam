@@ -6,15 +6,22 @@ public class MoveCreator {
 
     public static void CreateMovesForClown(ref Move firstLightAttack, ref Move firstHeavyAttack, Move blockMove, DamageRumble strongRumble, DamageRumble lightRumble)
     {
-        var heavyAttackShort = new Move("HeavyAttackShort", 36, 17, 15, 1000, null, null, blockMove,
-            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            4, 13, strongRumble)
-        { damage = 5, soundName = "Clown_Hammer_Hit", missName = "Clown_Hammer_Miss" };
+        var hammerRumble = new DamageRumble
+        {
+            m_duration = 0.35f,
+            m_higherMotor = 1,
+            m_lowerMotor = 1
+        };
+
+        var heavyAttackShort = new Move("HeavyAttackShort", 36, 26, 20, 1000, null, null, blockMove,
+            new Vector2(-2.5f, 0.0f), new Vector2(3.25f, 3.75f),
+            21, 27, hammerRumble)
+        { damage = 6, soundName = "Clown_Hammer_Hit", missName = "Clown_Hammer_Miss" };
 
         var heavyAttackLong = new Move("HeavyAttackLong", 36, 26, 20, 1000, null, null, blockMove,
-            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            14, 23, strongRumble)
-        { damage = 5, soundName = "Clown_Hammer_Hit", missName = "Clown_Hammer_Miss" };
+            new Vector2(-2.5f, 0.0f), new Vector2(3.25f, 3.75f),
+            21, 27, hammerRumble)
+        { damage = 6, soundName = "Clown_Hammer_Hit", missName = "Clown_Hammer_Miss" };
 
         var lightAttack3 = new Move("LightAttack3", 21, 14, 5, 1000, null, null, blockMove,
             new Vector2(-1.0f, 0.5f), new Vector2(2, 1),
