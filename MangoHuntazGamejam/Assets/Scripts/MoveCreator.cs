@@ -17,17 +17,17 @@ public class MoveCreator {
         { damage = 5, soundName = "Clown_Hammer_Hit", missName = "Clown_Hammer_Miss" };
 
         var lightAttack3 = new Move("LightAttack3", 18, 14, 5, 1000, null, null, blockMove,
-            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            new Vector2(-1.0f, 0.5f), new Vector2(2, 1),
             9, 14, strongRumble)
         { damage = 3, soundName = "Clown_Bite_Hit", missName = "Clown_Bite_Miss" };
 
         var lightAttack2 = new Move("LightAttack2", 18, 14, 5, 1000, lightAttack3, heavyAttackShort, blockMove,
-            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            new Vector2(-1.0f, 0.5f), new Vector2(2, 1),
             9, 14, lightRumble)
         { damage = 2, soundName = "Clown_Bite_Hit", missName = "Clown_Bite_Miss" };
 
         var lightAttack1 = new Move("LightAttack1", 18, 14, 5, 1000, lightAttack2, null, blockMove,
-            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            new Vector2(-1.0f, 0.5f), new Vector2(2, 1),
             9, 14, lightRumble)
         { damage = 1, soundName = "Clown_Bite_Hit", missName = "Clown_Bite_Miss" };
 
