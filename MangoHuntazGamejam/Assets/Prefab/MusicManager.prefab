@@ -1,0 +1,236 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1130547230027656}
+  m_IsPrefabParent: 1
+--- !u!1 &1130547230027656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4321831338462372}
+  - component: {fileID: 114642518183434640}
+  - component: {fileID: 82262631440536202}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4321831338462372
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130547230027656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82262631440536202
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130547230027656}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &114642518183434640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1130547230027656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89378656401b12c4798944768ea2c6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainLoopSource: {fileID: 0}
+  Clown_Bite_Hit:
+  - {fileID: 8300000, guid: 4287870c191c8964ba2c7a06724f6dbd, type: 3}
+  - {fileID: 8300000, guid: 079b7d770d0d1244d8cdb6b5e5251955, type: 3}
+  - {fileID: 8300000, guid: 405864e28e7ee4b49b5b6a3a00a6efb5, type: 3}
+  - {fileID: 8300000, guid: 589624fd71986ce468bd7cdeb89a5764, type: 3}
+  Clown_Bite_Miss:
+  - {fileID: 8300000, guid: 2116273bfa4ee1646a6dac6c0d244d46, type: 3}
+  - {fileID: 8300000, guid: 153c7c569816e584780993e6a13d4ccf, type: 3}
+  - {fileID: 8300000, guid: 4d3e6e3121648864ca78dfbf1f8ae5f9, type: 3}
+  - {fileID: 8300000, guid: e8f2d3bda98e50d4fbfe8639f0151ced, type: 3}
+  Clown_Block:
+  - {fileID: 8300000, guid: 0f81a8ec1a7dd2642aca407c35400a1f, type: 3}
+  - {fileID: 8300000, guid: 3d6e0d84dc5f8b644b1c26035d7c4e16, type: 3}
+  - {fileID: 8300000, guid: e1fa6d6502ff5a849b9d5bc01a3bb4bf, type: 3}
+  Clown_Hammer_Hit:
+  - {fileID: 8300000, guid: ce56cad8a239dbe418a13d973c390c49, type: 3}
+  - {fileID: 8300000, guid: c87b351e20846d24d9d7d563989f8748, type: 3}
+  Clown_Hammer_Miss:
+  - {fileID: 8300000, guid: 04829f9c70a3dce4ca592c3a08f3501e, type: 3}
+  Clown_Hammer_Swing:
+  - {fileID: 8300000, guid: 04829f9c70a3dce4ca592c3a08f3501e, type: 3}
+  Clown_Laugh_Heavy:
+  - {fileID: 8300000, guid: 06bc651e31ef2ab43898e120fd53f85d, type: 3}
+  - {fileID: 8300000, guid: ba5f98be9dcd8c0409c337237e96d660, type: 3}
+  Clown_Laugh_Light:
+  - {fileID: 8300000, guid: 82008137a1d105346abafd714e0a1aeb, type: 3}
+  - {fileID: 8300000, guid: 27c51c269cbdb0f4c8ad6a8a166b55a3, type: 3}
+  - {fileID: 8300000, guid: 1be4f10a18bbc414187b3e06f2d9b939, type: 3}
+  - {fileID: 8300000, guid: 34633f0ee6374e44a916ed20582723cc, type: 3}
+  Clown_Laugh_Win:
+  - {fileID: 8300000, guid: d2f1080e1db59234dae64e0e1ba28303, type: 3}
+  - {fileID: 8300000, guid: c3c97c48e7388e147b9bf6c5e8821da9, type: 3}
+  - {fileID: 8300000, guid: 5f0918497a3159e469562008cc1698c4, type: 3}
+  - {fileID: 8300000, guid: 8e33b9365e5ecf546aebd00919aa8138, type: 3}
+  Clown_Footstep:
+  - {fileID: 8300000, guid: 549bb692f35adb144bdd310e9f7186c5, type: 3}
+  - {fileID: 8300000, guid: d0e44bb3cbbac9349aef317334ee7ac9, type: 3}
+  - {fileID: 8300000, guid: d7e51f7e3488f404f9ef9d9334ec76f0, type: 3}
+  - {fileID: 8300000, guid: 933680ec82fd65f4e84cb971ac2fd5e3, type: 3}
+  SK_Machete_Hit:
+  - {fileID: 8300000, guid: ce54cdcd195ea2e46be0da0a291a5097, type: 3}
+  - {fileID: 8300000, guid: 79c218763a956a14ca20ee7b9e839a25, type: 3}
+  - {fileID: 8300000, guid: 7c91c9e888082964bb67be2c7681e302, type: 3}
+  - {fileID: 8300000, guid: 8b421fd027517f74887b6cb975bfd73a, type: 3}
+  SK_Machete_Miss:
+  - {fileID: 8300000, guid: dd27ceaeea5886f40a630486df351f5f, type: 3}
+  - {fileID: 8300000, guid: fe2888c49e8dfc043a924e4afd8e3c95, type: 3}
+  - {fileID: 8300000, guid: 0181724827335b342b7f9653bb88633c, type: 3}
+  - {fileID: 8300000, guid: d284750b652f97a4d96d6078f22cceae, type: 3}
+  SK_Block:
+  - {fileID: 8300000, guid: 59dd2895538ba9d4c92a9f8a522fa5a5, type: 3}
+  - {fileID: 8300000, guid: 055c441ddda57cd4bb16a89b122fbe81, type: 3}
+  - {fileID: 8300000, guid: 5d2e3f5c3f9b2ce479c05e3185eb7f23, type: 3}
+  SK_Scythe_Hit:
+  - {fileID: 8300000, guid: 05695e37583e68c40b669a473641e30a, type: 3}
+  - {fileID: 8300000, guid: 74fcc8042cbf3af42a40485619254c27, type: 3}
+  - {fileID: 8300000, guid: 1677e4e3d1ff7a744b52752dbd3c710e, type: 3}
+  - {fileID: 8300000, guid: d06b25534ec84c441a9fa32dad378b3c, type: 3}
+  SK_Scythe_Miss:
+  - {fileID: 8300000, guid: fd7a50dc3ba72dc4db8cab9b5d37dccf, type: 3}
+  - {fileID: 8300000, guid: 97213dc0e1fe1754087e0f44aff0568b, type: 3}
+  - {fileID: 8300000, guid: 003e886994af5bb49a427697ea7e4600, type: 3}
+  - {fileID: 8300000, guid: ac4d3893c956e6b4da5d3fef5222dc79, type: 3}
+  SK_Breath_Heavy:
+  - {fileID: 8300000, guid: 46ed4dd28de8cee43ab5cc26683924b0, type: 3}
+  - {fileID: 8300000, guid: e64609c99f966914384928e0c60939e3, type: 3}
+  SK_Breath_Light:
+  - {fileID: 8300000, guid: b19e5936efa27354bb38450298cc7827, type: 3}
+  - {fileID: 8300000, guid: 800745eeb198d4846a033544e2778f4d, type: 3}
+  SK_Breath_Win:
+  - {fileID: 8300000, guid: 19f533ca375238b47b0ebfad4a87c737, type: 3}
+  SK_Footstep:
+  - {fileID: 8300000, guid: 8d50359f061f2774ca0c51443a8fb55d, type: 3}
+  - {fileID: 8300000, guid: 3257cc293a707d543aa672e0920b9e13, type: 3}
+  - {fileID: 8300000, guid: 4d69ce084eb37c34a9388022ede10aab, type: 3}
+  - {fileID: 8300000, guid: 3e579ed41a3db06499535e446a8d7b55, type: 3}
+  Clown_Wins:
+  - {fileID: 8300000, guid: bb62f44654f588f4a8535bf05866a85a, type: 3}
+  SK_Wins:
+  - {fileID: 8300000, guid: c0b5e866c8a716d43b47b6de6c913d7e, type: 3}
+  Haunt:
+  - {fileID: 8300000, guid: fd91e5fa7b7f92149aa734b8e2a6c158, type: 3}
+  Nightmare:
+  - {fileID: 8300000, guid: 5f75205ebf811914fba8abd07e495f58, type: 3}
+  TerrorReign:
+  - {fileID: 8300000, guid: 42c55773b3592e84c9de3e54702dd80d, type: 3}

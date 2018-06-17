@@ -27,20 +27,7 @@ public class Player : MonoBehaviour
     private new Rigidbody2D rigidbody;
 
     public bool isControllable = false;
-    private bool animatedExists = false;
 
-    public Transform healthbarTransform;
-    private Vector3 healthbarOrigin;
-    //[SerializeField]
-    private Image stars;
-    //[SerializeField]
-    private Image beam;
-    private float startime = 0.02f;
-    private float beamtime;
-    //[SerializeField]
-    private GameObject gold;
-    public Transform chargebarTransform;
-    private Vector3 chargebarOrigin;
     public DamageRumble m_deathRumbel;
     public DamageRumble m_lightAttackRumbel;
     public DamageRumble m_strongAttackRumbel;
@@ -50,7 +37,92 @@ public class Player : MonoBehaviour
     {
         animator = transform.GetComponentInChildren<Animator>();
         rigidbody = transform.GetComponent<Rigidbody2D>();
-        //gold = chargebarTransform.Find("Gold").gameObject;
+    }
+
+    private void CreateMovesForClown(ref Move firstLightAttack, ref Move firstHeavyAttack)
+    {
+        var heavyAttackShort = new Move("HeavyAttackShort", 21, 17, 15, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            4, 13, m_strongAttackRumbel)
+        { damage = 5 };
+
+        var heavyAttackLong = new Move("HeavyAttackLong", 32, 26, 20, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            14, 23, m_strongAttackRumbel)
+        { damage = 5 };
+
+        var lightAttack3 = new Move("LightAttack3", 15, 8, 5, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            5, 15, m_strongAttackRumbel)
+        { damage = 3 };
+
+        var lightAttack2 = new Move("LightAttack2", 15, 7, 5, 1000, lightAttack3, heavyAttackShort, blockMove,
+            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            3, 7, m_lightAttackRumbel)
+        { damage = 2 };
+
+        var lightAttack1 = new Move("LightAttack1", 15, 7, 5, 1000, lightAttack2, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            3, 7, m_lightAttackRumbel)
+        { damage = 1 };
+
+        lightAttack1.displacementStart = 1;
+        lightAttack1.displacementEnd = 3;
+        lightAttack1.displacement = 0.5f;
+
+        lightAttack2.displacementStart = 1;
+        lightAttack2.displacementEnd = 3;
+        lightAttack2.displacement = 0.5f;
+
+        lightAttack3.displacementStart = 1;
+        lightAttack3.displacementEnd = 4;
+        lightAttack3.displacement = 0.75f;
+
+        firstLightAttack = lightAttack1;
+        firstHeavyAttack = heavyAttackLong;
+    }
+
+    private void CreateMovesForSerialkiller(ref Move firstLightAttack, ref Move firstHeavyAttack)
+    {
+        var heavyAttackShort = new Move("HeavyAttackShort", 21, 17, 15, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            4, 13, m_strongAttackRumbel)
+        { damage = 5 };
+
+        var heavyAttackLong = new Move("HeavyAttackLong", 32, 26, 20, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
+            14, 23, m_strongAttackRumbel)
+        { damage = 5 };
+
+        var lightAttack3 = new Move("LightAttack3", 15, 8, 5, 1000, null, null, blockMove,
+            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
+            5, 15, m_strongAttackRumbel)
+        { damage = 3 };
+
+        var lightAttack2 = new Move("LightAttack2", 15, 7, 5, 1000, lightAttack3, heavyAttackShort, blockMove,
+            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
+            3, 7, m_lightAttackRumbel)
+        { damage = 2 };
+
+        var lightAttack1 = new Move("LightAttack1", 15, 7, 5, 1000, lightAttack2, null, blockMove,
+            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
+            3, 7, m_lightAttackRumbel)
+        { damage = 1 };
+
+        lightAttack1.displacementStart = 1;
+        lightAttack1.displacementEnd = 3;
+        lightAttack1.displacement = 0.5f;
+
+        lightAttack2.displacementStart = 1;
+        lightAttack2.displacementEnd = 3;
+        lightAttack2.displacement = 0.5f;
+
+        lightAttack3.displacementStart = 1;
+        lightAttack3.displacementEnd = 4;
+        lightAttack3.displacement = 0.75f;
+
+        firstLightAttack = lightAttack1;
+        firstHeavyAttack = heavyAttackLong;
     }
 
     // Use this for initialization
@@ -58,62 +130,30 @@ public class Player : MonoBehaviour
     {
         blockMove = new Move("Block", 30, 25, 5, 30, null, null, null, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
-        var heavyAttackShort = new Move("HeavyAttackShort", 12, 12, 7, 12, null, null, blockMove,
-            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            0, 12, m_strongAttackRumbel)
-        { damage = 5 };
+        Move firstLightAttack = null;
+        Move firstHeavyAttack = null;
 
-        var heavyAttackLong = new Move("HeavyAttackLong", 18, 13, 10, 18, null, null, blockMove,
-            new Vector2(1.5f, 0.5f), new Vector2(3, 2.5f),
-            0, 18, m_strongAttackRumbel)
-        { damage = 5 };
+        if (playerId == 1)
+        {
+            CreateMovesForSerialkiller(ref firstLightAttack, ref firstHeavyAttack);
+        }
+        else if (playerId == 2)
+        {
+            CreateMovesForSerialkiller(ref firstLightAttack, ref firstHeavyAttack);
+        }
 
-        var lightAttack3 = new Move("LightAttack3", 30, 15, 10, 30, null, null, blockMove,
-            new Vector2(1.5f, 0.75f), new Vector2(1.5f, 1),
-            20, 35, m_strongAttackRumbel)
-        { damage = 3 };
+        staggerMove = new Move("Stagger", 15, 14, 0, 1000, firstLightAttack, firstHeavyAttack, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
 
-        var lightAttack2 = new Move("LightAttack2", 21, 15, 5, 20, lightAttack3, heavyAttackShort, blockMove,
-            new Vector2(1.75f, 0.75f), new Vector2(1.25f, 2.5f),
-            0, 15, m_lightAttackRumbel)
-        { damage = 2 };
-
-        var lightAttack1 = new Move("LightAttack1", 21, 15, 5, 20, lightAttack2, null, blockMove,
-            new Vector2(1.5f, 0.5f), new Vector2(1, 2),
-            0, 15, m_lightAttackRumbel)
-        { damage = 1 };
-
-        lightAttack1.displacementStart = 1;
-        lightAttack1.displacementEnd = 3;
-        lightAttack1.displacement = 1.0f;
-
-        lightAttack2.displacementStart = 1;
-        lightAttack2.displacementEnd = 3;
-        lightAttack2.displacement = 1.0f;
-
-        lightAttack3.displacementStart = 1;
-        lightAttack3.displacementEnd = 4;
-        lightAttack3.displacement = 1.25f;
-
-        staggerMove = new Move("Stagger", 15, 14, 0, 1000, lightAttack1, heavyAttackShort, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, m_blockRumbel);
-
-        idleMove = new Move("Idle", -1, -1, -1, -1, lightAttack1, heavyAttackLong, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
+        idleMove = new Move("Idle", -1, -1, -1, -1, firstLightAttack, firstHeavyAttack, blockMove, Vector2.zero, Vector2.zero, int.MaxValue, -1, null);
         idleMove.loop = true;
 
         currentMove = idleMove;
-
-        healthbarOrigin = healthbarTransform.position;
-
-        chargebarOrigin = chargebarTransform.position;
-        if (playerId == 2)
-        {
-            beamtime = 1f;
-            startime = 1f;
-        }
     }
 
     void FixedUpdate()
     {
+        rigidbody.velocity = Vector2.zero;
+
         currentFrame++;
 
         if (currentMove.displacement != 0 && currentFrame >= currentMove.displacementStart && currentFrame <= currentMove.displacementEnd)
@@ -191,8 +231,6 @@ public class Player : MonoBehaviour
         NextMove(staggerMove);
     }
 
-
-
     private bool CanMove()
     {
         if (!isControllable)
@@ -240,7 +278,7 @@ public class Player : MonoBehaviour
 
         //Debug TODO
         if (InputManager.y_Button_down(playerId))
-            Stagger(100);
+            Stagger(30);
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
         {
@@ -254,67 +292,9 @@ public class Player : MonoBehaviour
                 next = idleMove;
             NextMove(next);
         }
-
-        //Update UI
-        var leftPlayer = playerId == 1;
-        var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
-        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
-
-        //var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
-        //var currentColor = chargebarTransform.GetComponent<Image>().color;
-        //Color newColor;
-        //if (playerId == 2)
-        //{ newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP2Active ? 1f : 0f); }
-        //else
-        //{ newColor = new Color(currentColor.r, currentColor.g, currentColor.b, GameManager.instance.specialP1Active ? 1f : 0f); }
-
-        //chargebarTransform.position = chargebarOrigin + new Vector3((float)(charge - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
-
-        //chargebarTransform.GetComponent<Image>().color = newColor;
-        //if (!animatedExists)
-        //    StartCoroutine("Animate");
     }
     public Move getBlockMove()
     {
         return blockMove;
     }
-    //public IEnumerator Animate()
-    //{
-    //    animatedExists = true;
-    //    while (true)
-    //    {
-    //        if (playerId == 1)
-    //        {
-    //            beamtime += 0.01f;
-    //            beamtime %= 1.0f;
-    //            startime += 0.008f;
-    //            startime %= 1.0f;
-    //        }
-    //        else
-    //        {
-    //            beamtime -= 0.01f;
-    //            if (beamtime <= 0)
-    //                beamtime = 1f;
-    //            startime -= 0.008f;
-    //            if (startime <= 0)
-    //                startime = 1f;
-
-    //        }
-
-    //        beam.material.SetFloat("_GlowPos", beamtime);
-    //        beam.material.SetFloat("_GlowWidth", 0.085f);
-    //        stars.material.SetFloat("_GlowPos", startime);
-    //        if (playerId == 1)
-    //        {
-    //            gold.SetActive(GameManager.instance.specialP1Active);
-    //            stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP1Active ? 0.14f : 0.0f);
-    //        }
-    //        else
-    //        {
-    //            gold.SetActive(GameManager.instance.specialP2Active);
-    //            stars.material.SetFloat("_GlowWidth", GameManager.instance.specialP2Active ? 0.14f : 0.0f);
-    //        }
-    //        yield return null;
-    //    }
-    //}
 }

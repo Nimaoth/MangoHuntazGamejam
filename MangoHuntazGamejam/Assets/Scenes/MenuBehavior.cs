@@ -17,7 +17,7 @@ public class MenuBehavior : MonoBehaviour {
 
     public void GoToGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainScene");
     }
 
     public void GoToControls()
