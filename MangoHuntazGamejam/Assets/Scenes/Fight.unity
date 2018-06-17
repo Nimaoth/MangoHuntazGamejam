@@ -424,7 +424,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 575a7c8fa5ba80542bddd039387247b1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.02
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -997,6 +997,58 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 442275147}
+--- !u!1001 &612061425
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4321831338462372, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
+        type: 2}
+      propertyPath: mainLoopSource
+      value: 
+      objectReference: {fileID: 282840812}
+    - target: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
+        type: 2}
+      propertyPath: mainMusicVolume
+      value: 0.0528
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &617850136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,6 +1496,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 689443851}
+--- !u!114 &695004434 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
+    type: 2}
+  m_PrefabInternal: {fileID: 612061425}
+  m_Script: {fileID: 11500000, guid: 89378656401b12c4798944768ea2c6d5, type: 3}
 --- !u!1 &793227784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,7 +2441,7 @@ MonoBehaviour:
   player2: {fileID: 2083916441}
   Player1Spawn: {fileID: 675556487}
   Player2Spawn: {fileID: 1288015000}
-  MAX_HEALTH: 100
+  MAX_HEALTH: 10
   CHARGE_NECESSARY: 0
   DAMAGE_REDUCTION_ON_BLOCK: 0
   healthPlayer1: 0
@@ -2394,13 +2452,14 @@ MonoBehaviour:
   specialP2Active: 0
   damageReductionP1: 0
   damageReductionP2: 0
-  introFadeSteps: 30
-  introFadeDuration: 0.9
+  introFadeSteps: 50
+  introFadeDuration: 1.5
   fightIntroImage: {fileID: 1221766774}
   fightImage: {fileID: 335482538}
   FightEndsImage: {fileID: 2059988581}
   SKWinsImage: {fileID: 115752835}
   ClownWinsImage: {fileID: 1880452217}
+  musicManager: {fileID: 695004434}
 --- !u!4 &1632873142
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player1Spawn
   - Player2Spawn
+  - MusicManager
   layers:
   - Default
   - TransparentFX

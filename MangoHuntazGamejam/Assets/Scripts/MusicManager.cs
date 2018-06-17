@@ -5,9 +5,22 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour {
 
     private Dictionary<string, AudioClip[]> soundDict;
+    private AudioSource audioSource;
+    public AudioSource mainLoopSource;
+    [Range(0.0f, 0.15f)]
+    public float mainMusicVolume;
+
 
     public void Awake()
     {
+
+
+
+
+
+        soundDict = new Dictionary<string, AudioClip[]>();
+        audioSource = GetComponent<AudioSource>();
+
         soundDict.Add("Clown_Bite_Hit", Clown_Bite_Hit);
         soundDict.Add("Clown_Bite_Miss", Clown_Bite_Miss);
         soundDict.Add("Clown_Block", Clown_Block);
@@ -64,7 +77,6 @@ public class MusicManager : MonoBehaviour {
 
 
 
-
     public void PlaySound(string soundName, Vector3 pos)
     {
         AudioClip[] arr = soundDict[soundName];
@@ -73,5 +85,42 @@ public class MusicManager : MonoBehaviour {
         AudioSource.PlayClipAtPoint(arr[index], pos);
     }
 
+    public void PlayTerror()
+    {
+        audioSource.clip = TerrorReign[0];
+        audioSource.Play();
+    }
 
+    public void PlayHaunt()
+    {
+        audioSource.clip = Haunt[0];
+        audioSource.Play();
+    }
+
+    public void PlayNightmare()
+    {
+        audioSource.clip = Nightmare[0];
+        audioSource.Play();
+    }
+    public void PlaySKWins()
+    {
+        audioSource.clip = SK_Wins[0];
+        audioSource.Play();
+    }
+
+    public void PlayClownWins()
+    {
+        audioSource.clip = Clown_Wins[0];
+        audioSource.Play();
+    }
+
+
+    public void AmpMainLoop()
+    {
+        mainLoopSource.volume = mainMusicVolume;
+    }
+    public void DeAmpMainLoop()
+    {
+        mainLoopSource.volume = 0.02f;
+    }
 }
