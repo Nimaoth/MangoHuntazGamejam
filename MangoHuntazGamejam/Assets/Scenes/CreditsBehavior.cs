@@ -5,22 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class CreditsBehavior : MonoBehaviour {
 
-    public Rigidbody2D CreditText;
-    
-    public int endPosition;
+    public Rigidbody2D CreditRigidbody;
     public long speed;
+
+    private RectTransform CreditTransform;
 
 	// Use this for initialization
 	void Start () {
-        CreditText.velocity = new Vector3(0, speed);
+        CreditTransform = CreditRigidbody.gameObject.GetComponent<RectTransform>();
+
+        CreditRigidbody.velocity = new Vector3(0, speed);
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (CreditText.position.y > endPosition)
+        if (CreditTransform.anchoredPosition.y > CreditTransform.sizeDelta.y && CreditTransform.sizeDelta.y > 100)
         {
-            CreditText.velocity = Vector3.zero;
+            CreditRigidbody.velocity = Vector3.zero;
         }
 
         if(InputManager.b_Button(1))
