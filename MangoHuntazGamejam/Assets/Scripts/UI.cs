@@ -38,7 +38,7 @@ public class UI : MonoBehaviour
         //Update UI
         var leftPlayer = player.playerId == 1;
         var health = leftPlayer ? GameManager.instance.healthPlayer1 : GameManager.instance.healthPlayer2;
-        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 4 : -4) * 50.0f, 0);
+        healthbarTransform.position = healthbarOrigin + new Vector3((float)(health - 100) / 100.0f * (leftPlayer ? 10 : -10) * 50.0f, 0);
 
         var charge = leftPlayer ? GameManager.instance.specialChargeP1 : GameManager.instance.specialChargeP2;
         var currentColor = chargebarTransform.GetComponent<Image>().color;

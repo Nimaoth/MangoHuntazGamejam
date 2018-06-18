@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
 
 
 
-            healthPlayer1 -= damage;
+            healthPlayer1 -= damage * 2;
 
             if (healthPlayer1 <= 0)
             {
@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            healthPlayer2 -= damage;
+            healthPlayer2 -= damage * 2;
             if (healthPlayer2 <= 0)
             {
                 RumbleFeedback.beginRumble(1, player1.m_deathRumbel);

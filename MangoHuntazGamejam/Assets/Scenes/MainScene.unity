@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -161,7 +161,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 130478778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.18, y: 0, z: 0}
+  m_LocalPosition: {x: 6.53, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 5.7273955, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -894,7 +894,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 982382b36c3609047afb567032c172ac, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d5331157d644337408fecfa6e2750486, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1595,7 +1595,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1785629577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.87, y: 0, z: 0}
+  m_LocalPosition: {x: -6.37, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 5.7273955, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1748,6 +1748,50 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 5f15bf3a159a11b4a897355bf09f6e4e, type: 2}
+    - target: {fileID: 1566630528396508, guid: 8ba56e926c9a2f049b74431eaf65311f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1315946866819856, guid: 8ba56e926c9a2f049b74431eaf65311f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224673749105268566, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224673749105268566, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224673749105268566, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224536540252583136, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224536540252583136, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224536540252583136, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114902671576900110, guid: 8ba56e926c9a2f049b74431eaf65311f,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da381bd7a103ca649abab14ebafa9195,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ba56e926c9a2f049b74431eaf65311f, type: 2}
   m_IsPrefabParent: 0
@@ -1989,7 +2033,7 @@ Prefab:
     - target: {fileID: 114642518183434640, guid: 06d837ec861bde5418a0fb43166dde75,
         type: 2}
       propertyPath: mainMusicVolume
-      value: 0.224
+      value: 0.731
       objectReference: {fileID: 0}
     - target: {fileID: 1130547230027656, guid: 06d837ec861bde5418a0fb43166dde75, type: 2}
       propertyPath: m_TagString
