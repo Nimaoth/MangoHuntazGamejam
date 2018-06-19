@@ -63,8 +63,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GlowPos: 0.724009
-    - _GlowWidth: 0.14
+    - _GlowPos: 0.57599914
+    - _GlowWidth: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

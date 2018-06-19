@@ -175,6 +175,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         if (CanMove())
         {
 
@@ -215,18 +217,20 @@ public class Player : MonoBehaviour
             animator.SetInteger("Direction", dir);
         }
 
-        if (InputManager.x_Button_down(playerId))
-            OnAttack(currentMove.onLightAttack);
-        if (InputManager.b_Button_down(playerId))
-            OnAttack(currentMove.onHeavyAttack);
-        if (InputManager.rb_Button_down(playerId))
-            OnAttack(currentMove.onBlock);
+
+        if(isControllable)
+        {
+            if (InputManager.x_Button_down(playerId))
+                OnAttack(currentMove.onLightAttack);
+            if (InputManager.b_Button_down(playerId))
+                OnAttack(currentMove.onHeavyAttack);
+            if (InputManager.rb_Button_down(playerId))
+                OnAttack(currentMove.onBlock);
+        }
 
 
 
-        //Debug TODO
-        if (InputManager.y_Button_down(playerId))
-            Stagger(30);
+
 
         if (currentFrame >= transitionTime && transitionTime >= 0)
         {
