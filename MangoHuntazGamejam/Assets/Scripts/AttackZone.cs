@@ -58,8 +58,8 @@ public class AttackZone : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         if (!enemy.currentMove.Equals(enemy.getBlockMove()))
         {
-            RumbleFeedback.beginRumble(player.playerId, player.currentMove.m_damageRumble);
-            GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage, player.currentMove.m_damageRumble);
+            RumbleFeedback.beginRumble(player.playerId, player.currentMove.damageRumble);
+            GameManager.instance.OnHit(enemyPlayerID, player.currentMove.damage, player.currentMove.damageRumble);
             enemy.Stagger(player.currentMove.stunDuration);
         }
         else

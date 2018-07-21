@@ -142,8 +142,6 @@ public class GameManager : MonoBehaviour
     {
         if (playerID == 1)
         {
-
-
             musicManager.PlaySound(player2.currentMove.soundName, player2.transform.position);
             
             if(player2.currentMove.name == "HeavyAttackShort" || player2.currentMove.name == "HeavyAttackLong")
@@ -154,8 +152,6 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-
-
             healthPlayer1 -= damage * 2;
 
             if (healthPlayer1 <= 0)
@@ -164,12 +160,13 @@ public class GameManager : MonoBehaviour
                 EndGame(2);
                 return;
             }
+
+            StartCoroutine(player1.Knockback(1, player2.currentMove.knockback, -1));
         }
         else
         {
 
             musicManager.PlaySound(player1.currentMove.soundName, player1.transform.position);
-
 
             if (player1.currentMove.name == "HeavyAttackShort" || player1.currentMove.name == "HeavyAttackLong")
             {
@@ -186,6 +183,8 @@ public class GameManager : MonoBehaviour
                 EndGame(1);
                 return;
             }
+
+            StartCoroutine(player2.Knockback(1, player1.currentMove.knockback, 1));
         }
         RumbleFeedback.beginRumble(playerID, damageRumble);
     }

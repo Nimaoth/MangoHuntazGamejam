@@ -37,12 +37,12 @@ public class Move {
     public int blockEnd;
     public float blockFactor;
 
-    public DamageRumble m_damageRumble;
+    public DamageRumble damageRumble;
 
     public string soundName;
     public string missName;
 
-    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block, Vector2 attackZoneCenter, Vector2 attackZoneSize, int attackZoneStart, int attackZoneEnd, DamageRumble damageRumble)
+    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move onBlock, Vector2 attackZoneCenter, Vector2 attackZoneSize, int attackZoneStart, int attackZoneEnd, DamageRumble damageRumble)
     {
         this.name = name;
         this.duration = duration;
@@ -51,24 +51,12 @@ public class Move {
         this.inputTimeEnd = inputTimeEnd;
         this.onLightAttack = onLightAttack;
         this.onHeavyAttack = onHeavyAttack;
-        this.onBlock = block;
+        this.onBlock = onBlock;
         this.attackZoneCenter = attackZoneCenter;
         this.attackZoneSize = attackZoneSize;
         this.attackZoneStart = attackZoneStart;
         this.attackZoneEnd = attackZoneEnd;
-        this.m_damageRumble = damageRumble;
-    }
-
-    public Move(string name, int duration, int cancelTime, int inputTimeStart, int inputTimeEnd, Move onLightAttack, Move onHeavyAttack, Move block, DamageRumble damageRumble)
-    {
-        this.name = name;
-        this.duration = duration;
-        this.cancelTime = cancelTime;
-        this.inputTimeStart = inputTimeStart;
-        this.inputTimeEnd = inputTimeEnd;
-        this.onLightAttack = onLightAttack;
-        this.onHeavyAttack = onHeavyAttack;
-        this.onBlock = block;
+        this.damageRumble = damageRumble;
     }
 
     public override string ToString()
