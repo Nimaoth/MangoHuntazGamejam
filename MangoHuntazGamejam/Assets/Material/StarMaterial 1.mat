@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: StarMaterial 1
   m_Shader: {fileID: 4800000, guid: 9b17626ae0848a94ab102dc94092ec29, type: 3}
   m_ShaderKeywords: 
@@ -63,8 +64,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GlowPos: 0.57599914
-    - _GlowWidth: 0
+    - _GlowPos: 0.11199939
+    - _GlowWidth: 0.14
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

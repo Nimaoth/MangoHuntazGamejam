@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: BarGlowStripe
   m_Shader: {fileID: 4800000, guid: 9b17626ae0848a94ab102dc94092ec29, type: 3}
   m_ShaderKeywords: _ALPHABLEND_ON
@@ -69,7 +70,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GlowPos: 0.5299998
+    - _GlowPos: 0.35997492
     - _GlowWidth: 0.085
     - _Metallic: 0
     - _Mode: 2

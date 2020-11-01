@@ -11,7 +11,7 @@ public static class InputManager
     {
         float axisValue = 0.0f;
         axisValue += Input.GetAxisRaw("Horizontal_" + playerId);
-        axisValue += Input.GetAxisRaw("Horizontal_DPAD_" + playerId);
+        //axisValue += Input.GetAxisRaw("Horizontal_DPAD_" + playerId);
         return Mathf.Clamp(axisValue, -1, 1);
     }
 
